@@ -1,0 +1,28 @@
+<h3>療養者情報編集</h3>
+<%= link_to("一覧へ戻る", "/patients") %>
+<%# エラー表示 %>
+<div class="col">
+  <% @patient.errors.full_messages.each do |message|%>
+    <blockquote>
+      <%= message %>
+    </blockquote>
+  <% end %>
+  <%= form_with model: @patient, url: "patient/update" do |form| %>
+    <div class="input-field row s6">
+      <%= form.text_field :name, class: "validate", id: "name" %>
+      <label for="name">名前</label>
+    </div>
+    <div class="input-field row s6">
+      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+      <label for="name_kana">名前(ふりがな)</label>
+    </div>
+    <div class="input-field row s6">
+      <%= form.number_field :age, class: "validate", id: "age"  %>
+      <label for="age">年齢</label>
+    </div>
+    <div class="input-field row s6">
+      <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "browser-default" } %>
+      <%# <label for="sex">性別</label> %>
+    </div>
+  <% end %>
+</>

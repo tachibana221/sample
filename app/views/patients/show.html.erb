@@ -5,3 +5,5 @@
     <p>年齢:<%= @patient.age %></p>
     <p>性別:<%= @patient.sex %></p>
 </div>
+<%= link_to("編集", "/patients/#{@patient.id}/edit") %>
+

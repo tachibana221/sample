@@ -1,11 +1,14 @@
 <h3>療養者新規登録</h3>
 <%= link_to("一覧へ戻る", "/patients") %>
+<%# エラー表示 %>
 <div class="row">
   <% @patient.errors.full_messages.each do |message|%>
     <blockquote>
       <%= message %>
     </blockquote>
   <% end %>
+
+  <%# TODO:form_withを使って書き換える %>
   <%= form_tag("/patients/create") do %>
     <div class="col s12">
       <div class="row">
