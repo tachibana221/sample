@@ -1,4 +1,5 @@
 <h1>療養者一覧</h1>
+<button class="waves-effect waves-teal btn-flat"><%= link_to("療養者新規登録", "/patients/new") %></button>
 <ul class="collection">
   <% @patients.each do |patient| %>
     <li class="collection-item"><%= link_to(patient.name, "/patients/#{patient.id}") %></li>
