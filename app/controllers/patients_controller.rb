@@ -1,5 +1,4 @@
 class PatientsController < ApplicationController
-
   # 一覧ページ
   def index
     @patients = Patient.all()
@@ -30,10 +29,10 @@ class PatientsController < ApplicationController
     @patient.age = form_params[:age]
     @patient.sex = form_params[:sex]
     if @patient.save()
-      flash[:notice] = "新しく療養者を登録しました"
-      redirect_to("/patients")
+      flash[:notice] = '新しく療養者を登録しました'
+      redirect_to('/patients')
     else
-      render("patients/new")
+      render('patients/new')
     end
   end
 
@@ -47,7 +46,7 @@ class PatientsController < ApplicationController
     @patient.age = form_params[:age]
     @patient.sex = form_params[:sex]
     if @patient.save()
-      flash[:notice] = "登録情報を更新しました"
+      flash[:notice] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")
     else
       render("patients/#{params[:id]}/edit")
@@ -58,8 +57,6 @@ class PatientsController < ApplicationController
   def destroy
     @patient = Patient.find_by(id: params[:id])
     @patient.destroy()
-    redirect_to("/patients")
+    redirect_to('/patients')
   end
-
-
 end
