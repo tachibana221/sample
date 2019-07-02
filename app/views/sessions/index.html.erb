@@ -1,0 +1,6 @@
+<h3>ログインする看護師を選択</h3>
+<div class="list-group">
+  <% @nurses.each do |nurse| %>
+    <%= link_to(nurse.name, "/login/#{nurse.id}", class:"list-group-item list-group-item-action") %>
+  <% end %>
+</div>
