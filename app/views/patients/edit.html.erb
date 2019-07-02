@@ -26,6 +26,6 @@
       <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "browser-default" } %>
       <%# <label for="sex">性別</label> %>
     </div>
-    <%= form.submit %>
+    <%= form.submit :"更新", class:"waves-effect waves-light btn" %>
   <% end %>
 </div>
