@@ -1,0 +1,31 @@
+<h3>看護師登録</h3>
+<%= link_to("一覧へ戻る", "/nurses") %>
+<%# エラー表示 %>
+<div class="col">
+  <% @nurse.errors.full_messages.each do |message|%>
+    <blockquote>
+      <%= message %>
+    </blockquote>
+  <% end %>
+
+  <%# 編集フォーム %>
+  <%= form_with model: @nurse do |form| %>
+    <div class="input-field row s6">
+      <%= form.label :"名前", class:"active"%>
+      <%= form.text_field :name, placeholder: "Enter your full name", class: "validate", id: "name" %>
+    </div>
+    <div class="input-field row s6">
+      <%= form.label :"名前(かな)", class:"active"%>
+      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+    </div>
+    <div class="input-field row s6">
+      <%= form.label :"パスワード"%>
+      <%= form.text_field :password, class: "validate", id: "password"  %>
+    </div>
+    <div class="input-field row s6">
+      <%= form.label :"パスワード(確認)"%>
+      <%= form.text_field :password_confirmation, class: "validate", id: "password_confirmation"  %>
+    </div>
+    <%= form.submit :"更新", class:"waves-effect waves-light btn" %>
+  <% end %>
+</div>
