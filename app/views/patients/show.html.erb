@@ -1,0 +1,11 @@
+<h1>療養者詳細</h1>
+<%= link_to("一覧へ戻る", "/patients") %>
+<div class="posts-index-item">
+    <p>名前:<%= @patient.name %></p>
+    <p>名前（かな）:<%= @patient.name_kana %></p>
+    <p>年齢:<%= @patient.age %></p>
+    <p>性別:<%= @patient.sex %></p>
+</div>
+<%= link_to("編集", "/patients/#{@patient.id}/edit", class: "waves-effect waves-light btn") %>
+<%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class: "waves-effect waves-light btn") %>
+

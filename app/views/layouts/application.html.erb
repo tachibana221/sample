@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%# ヘッダー %>
+    <nav>
+      <div class="nav-wrapper">
+        <div class="brand-logo">
+          Nurse System on Rails
+        </div>
+      </div>
+    </nav>
+    <%# 本体 %>
+    <div class="container">
+      <%# ここに書くページのerbが読み込まれる %>
+      <%= yield %>
+    </div>
   </body>
 </html>
