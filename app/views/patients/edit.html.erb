@@ -7,22 +7,25 @@
       <%= message %>
     </blockquote>
   <% end %>
-  <%= form_with model: @patient, url: "patient/update" do |form| %>
+
+  <%# 編集フォーム %>
+  <%= form_with model: @patient do |form| %>
     <div class="input-field row s6">
-      <%= form.text_field :name, class: "validate", id: "name" %>
-      <label for="name">名前</label>
+      <%= form.label :"名前", class:"active"%>
+      <%= form.text_field :name, placeholder: "Enter your full name", class: "validate", id: "name" %>
     </div>
     <div class="input-field row s6">
+      <%= form.label :"名前(かな)", class:"active"%>
       <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
-      <label for="name_kana">名前(ふりがな)</label>
     </div>
     <div class="input-field row s6">
+      <%= form.label :"年齢", class:"active"%>
       <%= form.number_field :age, class: "validate", id: "age"  %>
-      <label for="age">年齢</label>
     </div>
     <div class="input-field row s6">
       <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "browser-default" } %>
       <%# <label for="sex">性別</label> %>
     </div>
+    <%= form.submit %>
   <% end %>
-</>
+</div>

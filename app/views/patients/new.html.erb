@@ -8,40 +8,24 @@
     </blockquote>
   <% end %>
 
-  <%# TODO:form_withを使って書き換える %>
-  <%= form_tag("/patients/create") do %>
-    <div class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="name" name="name" type="text" class="validate"　value=<%= @patient.name %>>
-          <label for="name">名前</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="name_kana" name="name_kana" type="text" class="validate"　value=<%= @patient.name_kana %>>
-          <label for="name_kana">名前(ふりがな)</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="age" name="age" type="number" class="validate"　value=<%= @patient.age %>>
-          <label for="age">年齢</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <select id="sex" name="sex" class="browser-default" 　value=<%= @patient.sex %>>
-            <option value="0" disabled selected>性別を選択して下さい</option>
-            <option value="1">男性</option>
-            <option value="2">女性</option>
-            <option value="0">その他</option>
-          </select>
-          <%# TODO:何故かセレクトボックスとラベルが重なってしまう %>
-          <%# <label for="sex">性別</label> %>
-        </div>
-      </div>
+  <%# 編集フォーム %>
+  <%= form_with model: @patient do |form| %>
+    <div class="input-field row s6">
+      <%= form.label :"名前" %>
+      <%= form.text_field :name, class: "validate", id: "name" %>
     </div>
-    <button class="btn waves-effect waves-light" type="submit" >登録</button>
+    <div class="input-field row s6">
+      <%= form.label :"名前(かな)" %>
+      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+    </div>
+    <div class="input-field row s6">
+      <%= form.label :"年齢" %>
+      <%= form.number_field :age, class: "validate", id: "age"  %>
+    </div>
+    <div class="input-field row s6">
+      <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "browser-default" } %>
+      <%# <label for="sex">性別</label> %>
+    </div>
+    <%= form.submit %>
   <% end %>
-</>
+</div>
