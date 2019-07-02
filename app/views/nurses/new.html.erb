@@ -3,28 +3,28 @@
 <%# エラー表示 %>
 <div class="col">
   <% @nurse.errors.full_messages.each do |message|%>
-    <blockquote>
+    <div class="alert alert-danger" role="alert">
       <%= message %>
-    </blockquote>
+    </div>
   <% end %>
 
   <%# 編集フォーム %>
-  <%= form_with model: @nurse do |form| %>
+  <%= form_with model: @nurse, local: true do |form| %>
     <div class="form-group">
       <%= form.label :"名前", class:"active"%>
-      <%= form.text_field :name, placeholder: "Enter your full name", class: "validate", id: "name" %>
+      <%= form.text_field :name, class: "form-control", id: "name" %>
     </div>
     <div class="form-group">
       <%= form.label :"名前(かな)", class:"active"%>
-      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+      <%= form.text_field :name_kana, class: "form-control", id: "name_kana" %>
     </div>
     <div class="form-group">
       <%= form.label :"パスワード"%>
-      <%= form.password_field :password, class: "validate", id: "password"  %>
+      <%= form.text_field :password, class: "form-control", id: "password"  %>
     </div>
     <div class="form-group">
       <%= form.label :"パスワード(確認)"%>
-      <%= form.password_field :password_confirmation, class: "validate", id: "password_confirmation"  %>
+      <%= form.text_field :password_confirmation, class: "form-control", id: "password_confirmation"  %>
     </div>
     <%= form.submit :"登録", class:"btn btn-primary" %>
   <% end %>

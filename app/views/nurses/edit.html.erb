@@ -3,13 +3,13 @@
 <%# エラー表示 %>
 <div class="col">
   <% @nurse.errors.full_messages.each do |message|%>
-    <blockquote>
+    <div class="alert alert-danger" role="alert">
       <%= message %>
-    </blockquote>
+    </div>
   <% end %>
 
   <%# 編集フォーム %>
-  <%= form_with model: @nurse do |form| %>
+  <%= form_with model: @nurse, local: true do |form| %>
     <div class="form-group">
       <%= form.label :"名前", class:"active"%>
       <%= form.text_field :name, class: "form-control", id: "name" %>
@@ -20,11 +20,11 @@
     </div>
     <div class="form-group">
       <%= form.label :"パスワード"%>
-      <%= form.text_field :password, class: "form-control", id: "password"  %>
+      <%= form.text_field :password, placeholder:"変更する場合は新しいパスワードを入力して下さい", class: "form-control", id: "password"  %>
     </div>
     <div class="form-group">
       <%= form.label :"パスワード(確認)"%>
-      <%= form.text_field :password_confirmation, class: "custom-select", id: "password_confirmation"  %>
+      <%= form.text_field :password_confirmation, placeholder:"変更する場合は新しいパスワードを入力して下さい", class: "form-control", id: "password_confirmation"  %>
     </div>
     <%= form.submit :"更新", class:"btn btn-primary" %>
   <% end %>
