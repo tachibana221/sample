@@ -10,22 +10,22 @@
 
   <%# 編集フォーム %>
   <%= form_with model: @nurse do |form| %>
-    <div class="input-field row s6">
+    <div class="form-group">
       <%= form.label :"名前", class:"active"%>
-      <%= form.text_field :name, placeholder: "Enter your full name", class: "validate", id: "name" %>
+      <%= form.text_field :name, class: "form-control", id: "name" %>
     </div>
-    <div class="input-field row s6">
+    <div class="form-group">
       <%= form.label :"名前(かな)", class:"active"%>
-      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+      <%= form.text_field :name_kana, class: "form-control", id: "name_kana" %>
     </div>
-    <div class="input-field row s6">
+    <div class="form-group">
       <%= form.label :"パスワード"%>
-      <%= form.text_field :password, class: "validate", id: "password"  %>
+      <%= form.text_field :password, class: "form-control", id: "password"  %>
     </div>
-    <div class="input-field row s6">
+    <div class="form-group">
       <%= form.label :"パスワード(確認)"%>
-      <%= form.text_field :password_confirmation, class: "validate", id: "password_confirmation"  %>
+      <%= form.text_field :password_confirmation, class: "custom-select", id: "password_confirmation"  %>
     </div>
-    <%= form.submit :"更新", class:"waves-effect waves-light btn" %>
+    <%= form.submit :"更新", class:"btn btn-primary" %>
   <% end %>
 </div>

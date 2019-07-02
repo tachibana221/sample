@@ -4,6 +4,6 @@
     <p>名前:<%= @nurse.name %></p>
     <p>名前（かな）:<%= @nurse.name_kana %></p>
 </div>
-<%= link_to("編集", "/nurses/#{@nurse.id}/edit", class: "waves-effect waves-light btn") %>
-<%= link_to("削除", "/nurses/#{@nurse.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class: "waves-effect waves-light btn") %>
+<%= link_to("編集", "/nurses/#{@nurse.id}/edit", class:"btn btn-primary") %>
+<%= link_to("削除", "/nurses/#{@nurse.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
 

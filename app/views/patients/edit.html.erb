@@ -1,5 +1,5 @@
 <h3>療養者情報編集</h3>
-<%= link_to("一覧へ戻る", "/patients") %>
+<%= link_to("一覧へ戻る", "/patients", class:"btn btn-link") %>
 <%# エラー表示 %>
 <div class="col">
   <% @patient.errors.full_messages.each do |message|%>
@@ -10,22 +10,22 @@
 
   <%# 編集フォーム %>
   <%= form_with model: @patient do |form| %>
-    <div class="input-field row s6">
-      <%= form.label :"名前", class:"active"%>
-      <%= form.text_field :name, placeholder: "Enter your full name", class: "validate", id: "name" %>
+    <div class="form-group">
+      <%= form.label :"名前"%>
+      <%= form.text_field :name, class: "form-control", id: "name" %>
     </div>
-    <div class="input-field row s6">
-      <%= form.label :"名前(かな)", class:"active"%>
-      <%= form.text_field :name_kana, class: "validate", id: "name_kana" %>
+    <div class="form-group">
+      <%= form.label :"名前(かな)"%>
+      <%= form.text_field :name_kana, class: "form-control", id: "name_kana" %>
     </div>
-    <div class="input-field row s6">
-      <%= form.label :"年齢", class:"active"%>
-      <%= form.number_field :age, class: "validate", id: "age"  %>
+    <div class="form-group">
+      <%= form.label :"年齢"%>
+      <%= form.number_field :age, class: "form-control", id: "age"  %>
     </div>
-    <div class="input-field row s6">
-      <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "browser-default" } %>
-      <%# <label for="sex">性別</label> %>
+    <div class="form-group">
+      <%= form.label :"性別"%>
+      <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "custom-select" } %>
     </div>
-    <%= form.submit :"更新", class:"waves-effect waves-light btn" %>
+    <%= form.submit :"更新", class:"btn btn-primary" %>
   <% end %>
 </div>
