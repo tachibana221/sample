@@ -1,7 +1,9 @@
 <h3>療養者一覧</h3>
-<%= link_to("療養者新規登録", "/patients/new", class: "waves-effect waves-light btn") %>
-<ul class="collection">
+<div class="btn-group">
+  <%= link_to("療養者新規登録", "/patients/new", class: "btn btn-link") %>
+</div>
+<div class="list-group">
   <% @patients.each do |patient| %>
-    <li class="collection-item"><%= link_to(patient.name, "/patients/#{patient.id}") %></li>
+    <%= link_to(patient.name, "/patients/#{patient.id}", class:"list-group-item list-group-item-action") %>
   <% end %>
-</ul>
+</div>

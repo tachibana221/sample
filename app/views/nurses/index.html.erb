@@ -1,0 +1,7 @@
+<h3>看護師一覧</h3>
+<%= link_to("看護師新規登録", "/nurses/new", class: "btn btn-link") %>
+<div class="list-group">
+  <% @nurses.each do |nurse| %>
+    <%= link_to(nurse.name, "/nurses/#{nurse.id}", class:"list-group-item list-group-item-action") %>
+  <% end %>
+</div>
