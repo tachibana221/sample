@@ -6,6 +6,8 @@
     <p>年齢:<%= @patient.age %></p>
     <p>性別:<%= @patient.sex %></p>
     <p>トピック:<%= @patient.topics %></p>
+    <p>トピック最終編集者:<%= @patient.topics_editor.name if !@patient.topics_editor.nil? %></p>
+    <p>トピック最終更新日時:<%= @patient.topics_updated_at %></p>
 </div>
 <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
 <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>

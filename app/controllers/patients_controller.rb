@@ -1,3 +1,4 @@
+require 'date'
 class PatientsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check, only: [:new, :edit, :update, :destroy]
@@ -26,11 +27,7 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new()
     # フォームの値取り出し
-    form_params = params[:patient]
-    @patient.name = form_params[:name]
-    @patient.name_kana = form_params[:name_kana]
-    @patient.age = form_params[:age]
-    @patient.sex = form_params[:sex]
+    @patient.update(params[:patient], current_nurse)
     if @patient.save()
       flash[:notice] = '新しく療養者を登録しました'
       redirect_to('/patients')
@@ -43,11 +40,7 @@ class PatientsController < ApplicationController
   def update
     @patient = Patient.find_by(id: params[:id])
     # フォームの値取り出し
-    form_params = params[:patient]
-    @patient.name = form_params[:name]
-    @patient.name_kana = form_params[:name_kana]
-    @patient.age = form_params[:age]
-    @patient.sex = form_params[:sex]
+    @patient.update(params[:patient], current_nurse)
     if @patient.save()
       flash[:notice] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")

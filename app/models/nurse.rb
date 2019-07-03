@@ -8,6 +8,16 @@ class Nurse < ApplicationRecord
   validates :password, presence: true, allow_nil: true
   has_secure_password
 
+  def update(params)
+    self.name = params[:name]
+    self.name_kana = params[:name_kana]
+    # パスワードが入力されていたら更新する
+    if params[:password] && params[:password_confirmation]
+      self.password = params[:password]
+      self.password_confirmation = params[:password_confirmation]
+    end
+  end
+
   # 渡された文字列のハッシュ値を返す
   def Nurse.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
