@@ -40,6 +40,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
+# 画像アップロード用
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+
 # コーディング規約
 gem 'rubocop'
 
