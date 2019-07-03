@@ -22,7 +22,7 @@
         </div>
         <div class="form-inline my-2 my-lg-0">
         <% if logged_in? %>
-          <%= link_to("ログアウト", "/login", class: "btn btn-link") %>
+          <%= link_to("ログアウト", "/logout", method: :delete, data: {confirm: "ログアウトしますか?"}, class:"btn btn-link") %>
         <% else %>
           <%= link_to("ログイン", "/login", class: "btn btn-link") %>
         <% end %>

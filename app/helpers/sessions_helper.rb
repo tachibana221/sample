@@ -13,4 +13,10 @@ module SessionsHelper
   def logged_in?
     !current_nurse.nil?
   end
+
+  # ログアウトする
+  def log_out
+    session.delete(:nurse_id)
+    @current_nurse = nil
+  end
 end
