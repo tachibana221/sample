@@ -5,7 +5,7 @@ class Nurse < ApplicationRecord
   # カラムのバリデート
   validates :name,  presence: true
   validates :name_kana,  presence: true  
-  validates :password, presence: true  
+  validates :password, presence: true, allow_nil: true
   has_secure_password
 
   # 渡された文字列のハッシュ値を返す
