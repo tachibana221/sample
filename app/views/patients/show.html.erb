@@ -5,6 +5,7 @@
     <p>名前（かな）:<%= @patient.name_kana %></p>
     <p>年齢:<%= @patient.age %></p>
     <p>性別:<%= @patient.sex %></p>
+    <p>トピック:<%= @patient.topics %></p>
 </div>
 <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
 <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
