@@ -1,13 +1,18 @@
 <h1>療養者詳細</h1>
 <%= link_to("一覧へ戻る", "/patients") %>
 <div class="posts-index-item">
-    <p>名前:<%= @patient.name %></p>
-    <p>名前（かな）:<%= @patient.name_kana %></p>
-    <p>年齢:<%= @patient.age %></p>
-    <p>性別:<%= @patient.sex %></p>
-    <p>トピック:<%= @patient.topics %></p>
-    <p>トピック最終編集者:<%= @patient.topics_editor.name if !@patient.topics_editor.nil? %></p>
-    <p>トピック最終更新日時:<%= @patient.topics_updated_at %></p>
+  <p>名前:<%= @patient.name %></p>
+  <p>名前（かな）:<%= @patient.name_kana %></p>
+  <p>年齢:<%= @patient.age %></p>
+  <p>性別:<%= @patient.sex %></p>
+  <p>トピック:<%= @patient.topics %></p>
+  <p>トピック最終編集者:<%= @patient.topics_editor.name if !@patient.topics_editor.nil? %></p>
+  <p>トピック最終更新日時:<%= @patient.topics_updated_at %></p>
+  <div style="width: 18rem;">
+    <%= image_tag(@patient.image.url, :class => "img-thumbnail") if @patient.image?%>
+  </div>
+  <p>トピック最終編集者:<%= @patient.image_editor.name if !@patient.image_editor.nil? %></p>
+  <p>トピック最終更新日時:<%= @patient.image_updated_at %></p>
 </div>
 <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
 <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
