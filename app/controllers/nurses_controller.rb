@@ -1,5 +1,5 @@
 class NursesController < ApplicationController
-  before_action :login_check, only: [:new, :edit, :update, :destroy]
+  before_action :login_check, only: [:destroy]
 
   # 一覧ページ
   def index
