@@ -1,5 +1,12 @@
 class Patient < ApplicationRecord
-  belongs_to :topics_editor, class_name: "Nurse"
+  # 最終更新者用の看護師モデルへの参照
+  belongs_to :topics_editor, class_name: "Nurse", optional: true
+  belongs_to :image_editor, class_name: "Nurse", optional: true
+
+  # 画像投稿用
+  mount_uploader :image, ImageUploader
+
+  # 名前は入力必須項目
   validates :name, presence: true
 
   def update(params, nurse)
@@ -7,13 +14,17 @@ class Patient < ApplicationRecord
     self.name_kana = params[:name_kana]
     self.age = params[:age]
     self.sex = params[:sex]
-    puts self.topics
-    puts params[:topics]
     if self.topics != params[:topics]
-      puts "eeeeeeeeeeeeee"
       self.topics = params[:topics]
       self.topics_editor = nurse
       self.topics_updated_at = Date.today.to_time
     end
+
+    if params[:image]
+      self.image = params[:image]
+      self.image_editor = nurse
+      self.image_updated_at = Date.today.to_time
+    end
+
   end
 end

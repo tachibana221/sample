@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_023839) do
+ActiveRecord::Schema.define(version: 2019_07_03_052958) do
 
   create_table "nurses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -31,8 +31,13 @@ ActiveRecord::Schema.define(version: 2019_07_03_023839) do
     t.text "topics"
     t.bigint "topics_editor_id"
     t.datetime "topics_updated_at"
+    t.string "image"
+    t.bigint "image_editor_id"
+    t.datetime "image_updated_at"
+    t.index ["image_editor_id"], name: "index_patients_on_image_editor_id"
     t.index ["topics_editor_id"], name: "index_patients_on_topics_editor_id"
   end
 
+  add_foreign_key "patients", "nurses", column: "image_editor_id"
   add_foreign_key "patients", "nurses", column: "topics_editor_id"
 end
