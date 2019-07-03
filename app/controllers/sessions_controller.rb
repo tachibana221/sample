@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
     # レコードが存在して、入力されたパスワードが正しいならログインさせる
     if @nurse && @nurse.authenticate(params[:password])
       log_in(@nurse)
+      # ブラウザを閉じてもログイン情報が保持されるようにする
+      remember(@nurse)
       redirect_to('/')
     else
       # エラー文を表示させる
@@ -22,7 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to('/')
   end
 end

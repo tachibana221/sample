@@ -1,4 +1,7 @@
 class PatientsController < ApplicationController
+  # ログイン済みのユーザーかどうかのチェック
+  before_action :login_check, only: [:new, :edit, :update, :destroy]
+
   # 一覧ページ
   def index
     @patients = Patient.all()
