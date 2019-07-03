@@ -25,11 +25,7 @@ class NursesController < ApplicationController
   def create
     @nurse = Nurse.new()
     # フォームの値取り出し
-    form_params = params[:nurse]
-    @nurse.name = form_params[:name]
-    @nurse.name_kana = form_params[:name_kana]
-    @nurse.password = form_params[:password]
-    @nurse.password_confirmation = form_params[:password_confirmation]
+    @nurse.update(params[:nurse])
     if @nurse.save()
       flash[:notice] = '新しく看護師を登録しました'
       redirect_to('/nurses')
@@ -42,16 +38,7 @@ class NursesController < ApplicationController
   def update
     @nurse = Nurse.find_by(id: params[:id])
     # フォームの値取り出し
-    form_params = params[:nurse]
-    @nurse.name = form_params[:name]
-    @nurse.name_kana = form_params[:name_kana]
-    
-    # パスワードが入力されていたら更新する
-    if form_params[:password] && form_params[:password_confirmation]
-      @nurse.password = form_params[:password]
-      @nurse.password_confirmation = form_params[:password_confirmation]
-    end
-
+    @nurse.update(params[:nurse])
     if @nurse.save()
       flash.now[:notice] = '登録情報を更新しました'
       redirect_to("/nurses/#{params[:id]}")
