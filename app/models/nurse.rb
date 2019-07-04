@@ -2,6 +2,10 @@ class Nurse < ApplicationRecord
   # ログイン状態を保持するためのトークン保存用
   attr_accessor :remember_token
 
+  # Patientへの関連付け
+  has_many :topics_editors, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
+  has_many :image_editors, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
+
   # カラムのバリデート
   validates :name,  presence: true
   validates :name_kana,  presence: true  
