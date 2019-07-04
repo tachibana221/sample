@@ -1,0 +1,7 @@
+<h3>除圧用具一覧</h3>
+<%= link_to("除圧用具登録", "/depressure_tools/new", class: "btn btn-link") %>
+<div class="list-group">
+  <% @tools.each do |tool| %>
+    <%= link_to(tool.name, "/depressure_tools/#{tool.id}", class:"list-group-item list-group-item-action") %>
+  <% end %>
+</div>
