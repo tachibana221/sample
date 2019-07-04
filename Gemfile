@@ -45,6 +45,7 @@ gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 
 # コーディング規約
 gem 'rubocop'
+gem 'rubocop-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

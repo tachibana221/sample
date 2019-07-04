@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 # 標準の規約 + Railsの規約
 Rails:
   Enabled: true
@@ -34,3 +36,6 @@ Style/AsciiComments:
 
 Style/MethodCallWithoutArgsParentheses:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
