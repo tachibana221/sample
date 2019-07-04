@@ -3,8 +3,8 @@ class Nurse < ApplicationRecord
   attr_accessor :remember_token
 
   # Patientへの関連付け
-  has_many :topics_editors, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
-  has_many :image_editors, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_topics_patients, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
+  has_many :edited_image_patients, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
 
   # カラムのバリデート
   validates :name,  presence: true
