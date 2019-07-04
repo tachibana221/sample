@@ -1,0 +1,2 @@
+module CareToolsHelper
+end

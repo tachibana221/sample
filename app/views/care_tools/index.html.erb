@@ -1,0 +1,7 @@
+<h3>ケア物品一覧</h3>
+<%= link_to("ケア物品登録", "/care_tools/new", class: "btn btn-link") %>
+<div class="list-group">
+  <% @tools.each do |tool| %>
+    <%= link_to(tool.name, "/care_tools/#{tool.id}", class:"list-group-item list-group-item-action") %>
+  <% end %>
+</div>
