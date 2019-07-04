@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
       <%= form.label :"性別"%>
-      <%= form.select :sex, {"男性"=>1, "女性"=>2, "その他"=>0,}, {}, { class: "custom-select" } %>
+      <%= form.select :sex, Patient.sexes.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
       <%= form.label :"トピック"%>

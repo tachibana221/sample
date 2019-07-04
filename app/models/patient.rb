@@ -9,6 +9,10 @@ class Patient < ApplicationRecord
   # 名前は入力必須項目
   validates :name, presence: true
 
+  # 性別を表すenum
+  # めんどくさいから日本語だけど許してくれ
+  enum sex: { "未入力": 0, "男性": 1, "女性": 2, "その他":9 }
+
   def update(params, nurse)
     self.name = params[:name]
     self.name_kana = params[:name_kana]
