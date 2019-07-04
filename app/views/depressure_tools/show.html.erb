@@ -1,2 +1,9 @@
-<h1>DepressureTools#show</h1>
-<p>Find me in app/views/depressure_tools/show.html.erb</p>
+<h1>看護師詳細</h1>
+<%= link_to("一覧へ戻る", "/depressure_tools") %>
+<div class="posts-index-item">
+    <p>名前:<%= @tool.name %></p>
+    <p>種類:<%= @tool.genre %></p>
+</div>
+<%= link_to("編集", "/depressure_tools/#{@tool.id}/edit", class:"btn btn-primary") %>
+<%= link_to("削除", "/depressure_tools/#{@tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
+
