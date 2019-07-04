@@ -1,7 +1,7 @@
 class Patient < ApplicationRecord
   # 最終更新者用の看護師モデルへの参照
-  belongs_to :topics_editor, class_name: "Nurse", optional: true
-  belongs_to :image_editor, class_name: "Nurse", optional: true
+  belongs_to :topics_editor, class_name: "Nurse", foreign_key: 'topics_editor_id', optional: true
+  belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
 
   # 画像投稿用
   mount_uploader :image, ImageUploader
