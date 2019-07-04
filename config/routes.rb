@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
   resources :patients
   resources :nurses
+  resources :depressure_tools
 
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'
