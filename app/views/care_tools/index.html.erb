@@ -2,6 +2,9 @@
 <%= link_to("ケア物品登録", "/care_tools/new", class: "btn btn-link") %>
 <div class="list-group">
   <% @tools.each do |tool| %>
-    <%= link_to(tool.name, "/care_tools/#{tool.id}", class:"list-group-item list-group-item-action") %>
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      <%= link_to("削除", "/care_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+    </div>
   <% end %>
 </div>
