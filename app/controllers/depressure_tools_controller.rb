@@ -1,23 +1,29 @@
+# 除圧用具コントローラー
 class DepressureToolsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check, only: [:new, :edit, :update, :destroy]
 
+  # 一覧ページ
   def index
     @tools = DepressureTool.all()
   end
 
+  # 新規作成ページ
   def new
     @tool = DepressureTool.new()
   end
 
+  # 詳細ページ
   def show
     @tool = DepressureTool.find_by(id: params[:id])
   end
 
+  # 編集ページ
   def edit
     @tool = DepressureTool.find_by(id: params[:id])
   end
 
+  # 新規作成
   def create
     @tool = DepressureTool.new()
     @tool.update(params[:depressure_tool])
@@ -29,6 +35,7 @@ class DepressureToolsController < ApplicationController
     end
   end
 
+  # 登録情報更新
   def update
     @tool = DepressureTool.find_by(id: params[:id])
     @tool.update(params[:depressure_tool])
@@ -40,6 +47,7 @@ class DepressureToolsController < ApplicationController
     end
   end
 
+  # 削除
   def destroy
     @tool = DepressureTool.find_by(id: params[:id])
     @tool.destroy()

@@ -7,10 +7,13 @@ class Nurse < ApplicationRecord
   has_many :edited_image_patients, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
 
   # カラムのバリデート
+  # 名前とパスワードは入力必須
   validates :name,  presence: true
   validates :password, presence: true, allow_nil: true
+  # bcryptを使うためのおまじない
   has_secure_password
 
+  # コントローラーから渡されたparamでカラムを更新する
   def update(params)
     self.name = params[:name]
     self.name_kana = params[:name_kana]

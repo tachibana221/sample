@@ -1,3 +1,4 @@
+# ログイン情報コントローラー
 class SessionsController < ApplicationController
 
   def index

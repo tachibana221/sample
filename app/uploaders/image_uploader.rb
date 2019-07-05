@@ -1,3 +1,5 @@
+# carrierwaveの設定用モデル
+# 基本的にいじらなくていい
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

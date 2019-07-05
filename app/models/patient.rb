@@ -4,6 +4,7 @@ class Patient < ApplicationRecord
   belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
 
   # 画像投稿用
+  # carrierwaveのおまじない
   mount_uploader :image, ImageUploader
 
   # 名前は入力必須項目
@@ -13,17 +14,20 @@ class Patient < ApplicationRecord
   # めんどくさいから日本語だけど許してくれ
   enum sex: { "未入力": 0, "男性": 1, "女性": 2, "その他":9 }
 
+  # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
     self.name = params[:name]
     self.name_kana = params[:name_kana]
     self.age = params[:age]
     self.sex = params[:sex]
+    # トピックが入力されてかつ、値が変更されていた場合は書き換える
     if params[:topics] != "" && params[:topics] != self.topics
       self.topics = params[:topics]
       self.topics_editor = nurse
       self.topics_updated_at = Date.today.to_time
     end
 
+    # 画像が投稿された場合は書き換える
     if params[:image]
       self.image = params[:image]
       self.image_editor = nurse

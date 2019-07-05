@@ -1,3 +1,4 @@
+# 療養者コントローラー
 require 'date'
 class PatientsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック

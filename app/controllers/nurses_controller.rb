@@ -1,3 +1,4 @@
+# 看護師コントローラー
 class NursesController < ApplicationController
   before_action :login_check, only: [:destroy]
 
