@@ -4,7 +4,10 @@
   <% @tools.each do |tool| %>
     <div class="list-group-item d-flex justify-content-between align-items-center">
       <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
-      <%= link_to("削除", "/care_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+      <div class="">
+        <%= link_to("編集", "/care_tools/#{tool.id}/edit", class:"btn btn-primary btn-sm") %>
+        <%= link_to("削除", "/care_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+      </div>
     </div>
   <% end %>
 </div>

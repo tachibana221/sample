@@ -18,7 +18,7 @@ class Patient < ApplicationRecord
     self.name_kana = params[:name_kana]
     self.age = params[:age]
     self.sex = params[:sex]
-    if self.topics != params[:topics]
+    if params[:topics] != "" && params[:topics] != self.topics
       self.topics = params[:topics]
       self.topics_editor = nurse
       self.topics_updated_at = Date.today.to_time
