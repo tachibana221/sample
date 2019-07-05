@@ -1,7 +1,7 @@
 <h3>看護師登録</h3>
 <%= link_to("一覧へ戻る", "/nurses") %>
-<%# エラー表示 %>
 <div class="col">
+  <%# エラー表示 %>
   <% @nurse.errors.full_messages.each do |message|%>
     <div class="alert alert-danger" role="alert">
       <%= message %>
@@ -10,22 +10,8 @@
 
   <%# 編集フォーム %>
   <%= form_with model: @nurse, local: true do |form| %>
-    <div class="form-group">
-      <%= form.label :"名前 *", class:"active"%>
-      <%= form.text_field :name, class: "form-control", id: "name" %>
-    </div>
-    <div class="form-group">
-      <%= form.label :"名前(かな)", class:"active"%>
-      <%= form.text_field :name_kana, class: "form-control", id: "name_kana" %>
-    </div>
-    <div class="form-group">
-      <%= form.label :"パスワード"%>
-      <%= form.password_field :password, placeholder:"変更する場合は新しいパスワードを入力して下さい", class: "form-control", id: "password"  %>
-    </div>
-    <div class="form-group">
-      <%= form.label :"パスワード(確認)"%>
-      <%= form.password_field :password_confirmation, placeholder:"変更する場合は新しいパスワードを入力して下さい", class: "form-control", id: "password_confirmation"  %>
-    </div>
+    <%# フォーム共通部分呼び出し %>
+    <%= render :partial => 'form', :locals => {:form => form} %>
     <%= form.submit :"更新", class:"btn btn-primary" %>
   <% end %>
 </div>

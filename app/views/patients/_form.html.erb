@@ -1,0 +1,24 @@
+<%#療養者の入力フォームの共通部分%>
+<div class="form-group">
+  <%= form.label :"名前"%>
+  <%= form.text_field :name, class: "form-control", id: "name" %>
+</div>
+<div class="form-group">
+  <%= form.label :"名前(かな)"%>
+  <%= form.text_field :name_kana, class: "form-control", id: "name_kana" %>
+</div>
+<div class="form-group">
+  <%= form.label :"年齢"%>
+  <%= form.number_field :age, class: "form-control", id: "age"  %>
+</div>
+<div class="form-group">
+  <%= form.label :"性別"%>
+  <%= form.select :sex, Patient.sexes.keys.to_a, {}, { class: "custom-select" } %>
+</div>
+<div class="form-group">
+  <%= form.label :"トピック"%>
+  <%= form.text_area :topics, class: "form-control", id: "topics" %>
+</div>
+<div class="form-group custom-file">
+  <%= form.file_field :image,  id: "image" %>
+</div>
