@@ -21,10 +21,18 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <%= form_with model: @bedsore_part, url:"/bedsore_parts", local: true do |form| %>
+              <%= form.hidden_field :patient_id, :value => @patient.id %>
+              <div class="modal-body">
+                <%= form.label :"場所"%>
+                <%= form.select :part_genre, BedsorePart.part_genres.keys.to_a, {}, { class: "custom-select" } %>
+              </div>
               <div class="modal-body">
                 <%= form.label :"部位名"%>
                 <%= form.text_field :part_name, class: "form-control", placeholder: "投稿内容を入力" %>
-                <%= form.hidden_field :patient_id, :value => @patient.id %>
+              </div>
+              <div class="modal-body">
+                <%= form.label :"好発部位"%>
+                <%= form.select :common_part, BedsorePart.common_parts.keys.to_a, {}, { class: "custom-select" } %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
