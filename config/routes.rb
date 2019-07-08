@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :nurses
   resources :depressure_tools
   resources :care_tools
+  resources :bedsore_parts
 
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'
