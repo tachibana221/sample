@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part_genre: 1
+  part_name: MyString
+  common_part: 1
+  patient: one
+  nurse: one
+
+two:
+  part_genre: 1
+  part_name: MyString
+  common_part: 1
+  patient: two
+  nurse: two

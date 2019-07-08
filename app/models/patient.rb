@@ -3,6 +3,8 @@ class Patient < ApplicationRecord
   belongs_to :topics_editor, class_name: "Nurse", foreign_key: 'topics_editor_id', optional: true
   belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
 
+  has_many :bedsore_parts
+
   # 画像投稿用
   # carrierwaveのおまじない
   mount_uploader :image, ImageUploader

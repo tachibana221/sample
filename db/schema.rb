@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_012908) do
+ActiveRecord::Schema.define(version: 2019_07_08_022709) do
+
+  create_table "bedsore_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "part_genre"
+    t.string "part_name"
+    t.integer "common_part"
+    t.bigint "patient_id"
+    t.bigint "nurse_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nurse_id"], name: "index_bedsore_parts_on_nurse_id"
+    t.index ["patient_id"], name: "index_bedsore_parts_on_patient_id"
+  end
 
   create_table "care_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "image"
@@ -67,6 +79,8 @@ ActiveRecord::Schema.define(version: 2019_07_08_012908) do
     t.index ["topics_editor_id"], name: "index_patients_on_topics_editor_id"
   end
 
+  add_foreign_key "bedsore_parts", "nurses"
+  add_foreign_key "bedsore_parts", "patients"
   add_foreign_key "care_infos", "nurses"
   add_foreign_key "care_infos", "nurses", column: "comment_editor_id"
   add_foreign_key "care_infos", "nurses", column: "image_editor_id"

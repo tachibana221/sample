@@ -8,6 +8,7 @@ class Nurse < ApplicationRecord
   has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'comment_editor_id', dependent: :nullify
   has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'image_editor_id', dependent: :nullify
   has_many :care_infos, dependent: :nullify
+  has_many :bedsore_parts, dependent: :nullify
 
   # カラムのバリデート
   # 名前とパスワードは入力必須
