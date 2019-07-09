@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :depressure_tools
   resources :care_tools
   resources :bedsore_parts
-
+  resources :care_infos
+  
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'
   get    'login/:id'   => 'sessions#new'
