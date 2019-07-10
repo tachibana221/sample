@@ -3,6 +3,7 @@ class BedsorePart < ApplicationRecord
   belongs_to :nurse, optional: true
 
   has_many :care_infos, dependent: :destroy
+  has_many :bedsores, dependent: :destroy
 
   # 大分類
   enum part_genre: {"未入力":0, "頭部":1, "胸部":2, "腰部":3, "右腕部":4, "左腕部":5, "右脚部":6, "左足部":7}, _prefix: true
