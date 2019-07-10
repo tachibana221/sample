@@ -1,2 +1,2 @@
-<h1>Bedsores#show</h1>
-<p>Find me in app/views/bedsores/show.html.erb</p>
+<h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
+<p>(撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at %></p>

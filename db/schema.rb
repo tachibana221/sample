@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_055316) do
   create_table "bedsores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "image"
     t.datetime "image_edited_at"
+    t.bigint "image_editor_id"
     t.text "comment"
     t.string "handwrite_image"
     t.bigint "bedsore_part_id"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_055316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bedsore_part_id"], name: "index_bedsores_on_bedsore_part_id"
+    t.index ["image_editor_id"], name: "index_bedsores_on_image_editor_id"
     t.index ["nurse_id"], name: "index_bedsores_on_nurse_id"
   end
 
@@ -98,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_055316) do
   add_foreign_key "bedsore_parts", "patients"
   add_foreign_key "bedsores", "bedsore_parts"
   add_foreign_key "bedsores", "nurses"
+  add_foreign_key "bedsores", "nurses", column: "image_editor_id"
   add_foreign_key "care_infos", "bedsore_parts"
   add_foreign_key "care_infos", "nurses"
   add_foreign_key "care_infos", "nurses", column: "comment_editor_id"

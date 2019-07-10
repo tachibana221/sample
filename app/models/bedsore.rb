@@ -1,5 +1,6 @@
 class Bedsore < ApplicationRecord
   belongs_to :bedsore_part
+  belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
   belongs_to :nurse, optional: true
 
   # 画像投稿用
@@ -12,10 +13,11 @@ class Bedsore < ApplicationRecord
     today = Date.today.to_time
     self.comment = params[:comment]
     self.nurse = nurse
-
+    
     # 画像が投稿された場合は書き換える
     if params[:image]
       self.image = params[:image]
+      self.image_editor = nurse
       self.image_edited_at = today
     end
 

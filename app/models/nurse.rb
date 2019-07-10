@@ -2,11 +2,12 @@ class Nurse < ApplicationRecord
   # ログイン状態を保持するためのトークン保存用
   attr_accessor :remember_token
 
-  # Patientへの関連付け
+  # ほかモデルへの関連付け
   has_many :edited_topics_patients, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
   has_many :edited_image_patients, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
   has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'comment_editor_id', dependent: :nullify
   has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_image_bedsore, class_name: "Bedsore", foreign_key: 'image_editor_id', dependent: :nullify
   has_many :care_infos, dependent: :nullify
   has_many :bedsore_parts, dependent: :nullify
   has_many :bedsores, dependent: :nullify
