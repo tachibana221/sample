@@ -5,6 +5,10 @@ class Nurse < ApplicationRecord
   # Patientへの関連付け
   has_many :edited_topics_patients, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
   has_many :edited_image_patients, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'comment_editor_id', dependent: :nullify
+  has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :care_infos, dependent: :nullify
+  has_many :bedsore_parts, dependent: :nullify
 
   # カラムのバリデート
   # 名前とパスワードは入力必須

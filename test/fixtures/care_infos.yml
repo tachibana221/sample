@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  image_edited_at: 2019-07-08 10:29:08
+  image_editor: one
+  comment: MyText
+  comment_edited_at: 2019-07-08 10:29:08
+  comment_editor: one
+  nurse_id: one
+
+two:
+  image: MyString
+  image_edited_at: 2019-07-08 10:29:08
+  image_editor: two
+  comment: MyText
+  comment_edited_at: 2019-07-08 10:29:08
+  comment_editor: two
+  nurse_id: two

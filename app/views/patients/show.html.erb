@@ -13,6 +13,54 @@
   </div>
   <p>トピック最終編集者:<%= @patient.image_editor.name if !@patient.image_editor.nil? %></p>
   <p>トピック最終更新日時:<%= @patient.image_updated_at %></p>
+  褥瘡部位
+  <div class="container">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post">褥瘡部位新規登録</button>
+    <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <%= form_with model: @bedsore_part, url:"/bedsore_parts", local: true do |form| %>
+            <%= form.hidden_field :patient_id, :value => @patient.id %>
+            <div class="modal-body">
+              <%= form.label :"場所"%>
+              <%= form.select :part_genre, BedsorePart.part_genres.keys.to_a, {}, { class: "custom-select" } %>
+            </div>
+            <div class="modal-body">
+              <%= form.label :"部位名"%>
+              <%= form.text_field :part_name, class: "form-control", placeholder: "投稿内容を入力" %>
+            </div>
+            <div class="modal-body">
+              <%= form.label :"好発部位"%>
+              <%= form.select :common_part, BedsorePart.common_parts.keys.to_a, {}, { class: "custom-select" } %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              <%= form.submit "登録", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="list-group">
+      <% @patient.bedsore_parts.each do |bedsore_part| %>
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <%= bedsore_part.part_name %>
+            <%
+=begin%>
+ <%= link_to(bedsore_part.part_name, "/bedsore_parts/#{bedsore_part.id}") %> 
+<%
+=end%>
+            <%= link_to("ケア情報", {:controller => "care_infos", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
+            <%= link_to("褥瘡管理", {:controller => "care_infos", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
+          </div>
+            <div class="">
+              <%= link_to("削除", "/bedsore_parts/#{bedsore_part.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
 <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
