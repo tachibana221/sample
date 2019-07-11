@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'design_rs/index'
+  get 'design_rs/show'
+  get 'design_rs/new'
+  get 'design_rs/edit'
   get 'bedsores/index'
   get 'bedsores/show'
   get 'bedsores/new'

@@ -1,3 +1,4 @@
+# 褥瘡部位
 class BedsorePart < ApplicationRecord
   belongs_to :patient
   belongs_to :nurse, optional: true

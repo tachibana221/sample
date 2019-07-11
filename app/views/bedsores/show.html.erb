@@ -1,2 +1,5 @@
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
 <p>(撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at %></p>
+<div style = "width: 250px;">
+  <%= image_tag(@bedsore.image.url, :class => "img-thumbnail") if @bedsore.image?%>
+</div>
