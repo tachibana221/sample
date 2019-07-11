@@ -24,7 +24,9 @@ class BedsoresController < ApplicationController
     @bedsore_part = BedsorePart.find(bedsore_part_id)
     bedsore = @bedsore_part.bedsores.build()
     bedsore.update(params, current_nurse)
-    if bedsore.save()
+    # 紐づくDesign_Rモデルを作る
+    design_r = bedsore.build_design_r
+    if bedsore.save() && design_r.save()
       flash[:notice] = '新しく褥瘡情報をを登録しました'
       redirect_to :action => "index", :bedsore_part_id => bedsore_part_id
     end
