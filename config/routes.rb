@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :care_infos
   # 褥瘡
   resources :bedsores
+  # DesignR
+  resources :design_rs
   
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'

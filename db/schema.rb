@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_080813) do
 
   create_table "design_rs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "depth"
+    t.integer "exudate"
     t.decimal "size_minor_axis", precision: 10
     t.decimal "size_major_axis", precision: 10
     t.integer "inflammation"

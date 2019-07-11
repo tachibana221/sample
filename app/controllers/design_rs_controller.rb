@@ -10,4 +10,13 @@ class DesignRsController < ApplicationController
 
   def edit
   end
+
+  def update
+    @designR = DesignR.find(params[:id])
+    @designR.update(params[:design_r])
+    if @designR.save()
+      flash[:notice] = 'DesignR情報を更新しました'
+      redirect_back(fallback_location: root_path)
+    end
+  end
 end
