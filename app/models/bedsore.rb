@@ -33,7 +33,7 @@ class Bedsore < ApplicationRecord
     # 手書き画像が投稿された場合は書き換える
     if params[:remote_handwrite_image_url]
       # base64で飛んでくるので変換する
-      image_data =  base64_conversion(params[:remote_handwrite_image_url])
+      image_data =  base64_conversion(params[:remote_handwrite_image_url], today.to_i)
       self.handwrite_image = image_data
       self.remote_handwrite_image_url = nil
     end

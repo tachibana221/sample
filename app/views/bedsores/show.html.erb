@@ -9,15 +9,18 @@
   <%= render :partial => 'design_r_form', :locals => {:form => form} %>
 <% end %>
 <h3>褥瘡画像</h3>
-<canvas id="mySketcher" width="500px" height="500px"></canvas>
-<%= form_for(@bedsore) do |form| %>
-  <%= form.hidden_field :remote_handwrite_image_url %>
-  <%= form.hidden_field :handwrite_image %>
-<% end %>
-<button id="save_canvas">保存</button>
-<div style = "width: 250px;">
-  <%= image_tag(@bedsore.image.url, :class => "img-thumbnail") if @bedsore.image?%>
-</div>
-<div style = "width: 250px;">
-  <%= image_tag(@bedsore.handwrite_image.url, :class => "img-thumbnail") if @bedsore.handwrite_image?%>
+
+<div>
+  <button id="save_canvas">保存</button>
+  <button id="clear_canvas">クリアー</button>
+  <div style="position: relative;">
+    <canvas class="border" id="mySketcher" style="position: absolute; z-index:50;"></canvas>
+    <%= image_tag(@bedsore.image.url, :class => "img-fluid",:id=> "under_image", :style => "position: absolute; z-index:1;") if @bedsore.image?%>
+  </div>
+
+  <%= form_for(@bedsore) do |form| %>
+    <%= form.hidden_field :remote_handwrite_image_url %>
+    <%= form.hidden_field :handwrite_image %>
+  <% end %>
+
 </div>
