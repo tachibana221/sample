@@ -27,7 +27,7 @@ class BedsoresController < ApplicationController
     # 紐づくDesign_Rモデルを作る
     design_r = bedsore.build_design_r
     if bedsore.save() && design_r.save()
-      flash[:notice] = '新しく褥瘡情報をを登録しました'
+      flash[:notice] = '新しく褥瘡情報を登録しました'
       redirect_to :action => "index", :bedsore_part_id => bedsore_part_id
     end
   end
@@ -37,14 +37,14 @@ class BedsoresController < ApplicationController
     @bedsore.update(params[:bedsore], current_nurse)
     if @bedsore.save()
       flash[:notice] = '褥瘡情報を更新しました'
-      redirect_to :action => "index", :bedsore_part_id => @bedsore.bedsore_part.id
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
     @bedsore = Bedsore.find(params[:id])
     if @bedsore.destroy()
-      redirect_back(fallback_location: root_path)
+      redirect_to :action => "index", :bedsore_part_id => @bedsore.bedsore_part.id
     end
   end
 end

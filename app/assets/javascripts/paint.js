@@ -10,6 +10,12 @@ function setupPainter() {
 		
 		// atrament（お絵かきライブラリ）セットアップ
 		const sketcher = atrament('#mySketcher');
+		const saveButton = $("#save_canvas");
+		const clearButton = $("#clear_canvas");
+		const colorSelector = $("#color_canvas");
+		const modeSelector = $("#mode_canvas");
+		const weightRange = $("#weight_canvas");
+		sketcher.weight = 5;
 
 		// 以前に書かれた画像を読み込む
 		const image_url = $("#bedsore_handwrite_image").val();
@@ -25,7 +31,7 @@ function setupPainter() {
 		}
 
 		// 手書き画像の保存処理
-    $("#save_canvas").on("click", function () {
+    saveButton.on("click", function () {
       const _form = $(".edit_bedsore")[0];
       const canvas_data = sketcher.toImage();
       $("#bedsore_remote_handwrite_image_url").val(canvas_data);
@@ -34,8 +40,26 @@ function setupPainter() {
 		});
 		
 		// 書いた文字を全部消す
-		$("#clear_canvas").on("click", function () {
+		clearButton.on("click", function () {
 			sketcher.clear();
+		});
+
+		// ペンの色を変更
+		colorSelector.change(function () {
+			const color = colorSelector.val();
+			sketcher.color = "#" + color
+		});
+
+		// モードを変更
+		modeSelector.change(function () {
+			const mode = modeSelector.val();			
+			sketcher.mode = mode;
+		});
+
+		// 太さ変更
+		weightRange.change(function () {
+			const weight = weightRange.val();			
+			sketcher.weight = parseFloat(weight);
 		});
   } 
 }
