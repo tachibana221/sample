@@ -16,6 +16,11 @@ default: &default
   username: root
   password:
   host: localhost
+  
+  # dockerを使う場合はpasswordとhostを下の2つに書き換えて
+  # host: db
+  # password: password
+
 
 development:
   <<: *default
