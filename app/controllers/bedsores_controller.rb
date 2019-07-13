@@ -19,6 +19,11 @@ class BedsoresController < ApplicationController
     @bedsore = Bedsore.find(bedsore_id)  
   end
 
+  def paint
+    bedsore_id = params[:id]
+    @bedsore = Bedsore.find(bedsore_id)  
+  end
+
   def create
     bedsore_part_id = params[:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)

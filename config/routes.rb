@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'design_rs/index'
-  get 'design_rs/show'
-  get 'design_rs/new'
-  get 'design_rs/edit'
-  get 'bedsores/index'
-  get 'bedsores/show'
-  get 'bedsores/new'
-  get 'bedsores/edit'
   # トップページ
   root 'home#top'
 
@@ -27,6 +19,7 @@ Rails.application.routes.draw do
   resources :care_infos
   # 褥瘡
   resources :bedsores
+  get 'bedsores/:id/paint' => 'bedsores#paint'
   # DesignR
   resources :design_rs
   
