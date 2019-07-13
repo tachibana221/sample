@@ -9,6 +9,22 @@
 <% end %>
 <h3>褥瘡画像</h3>
 <canvas id="mySketcher" width="500px" height="500px"></canvas>
+<%= form_for(@bedsore) do |form| %>
+  <%= form.hidden_field :remote_handwrite_image_url %>
+  <%= form.hidden_field :handwrite_image %>
+<% end %>
+<button id="save_canvas">保存</button>
 <div style = "width: 250px;">
   <%= image_tag(@bedsore.image.url, :class => "img-thumbnail") if @bedsore.image?%>
 </div>
+
+<%= javascript_tag do %>
+function drwaing(){
+  if($("#mySketcher").length > 0){
+    const test = <%= raw @bedsore.handwrite_image.url %>;
+    console.log(test)
+  } 
+}
+
+window.onload = drwaing
+<% end %>

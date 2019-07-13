@@ -1,5 +1,6 @@
 # 褥瘡
 class Bedsore < ApplicationRecord
+  include CarrierwaveBase64Uploader
   belongs_to :bedsore_part
   belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
   belongs_to :nurse, optional: true
@@ -26,7 +27,15 @@ class Bedsore < ApplicationRecord
 
     # 画像が投稿された場合は書き換える
     if params[:handwrite_image]
-      self.image = params[:handwrite_image]
+      self.handwrite_image = params[:handwrite_image]
+    end
+
+    # 手書き画像が投稿された場合は書き換える
+    if params[:remote_handwrite_image_url]
+      # base64で飛んでくるので変換する
+      image_data =  base64_conversion(params[:remote_handwrite_image_url])
+      self.handwrite_image = image_data
+      self.remote_handwrite_image_url = nil
     end
   end
 end
