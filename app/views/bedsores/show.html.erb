@@ -1,4 +1,5 @@
-<%= javascript_include_tag "atrament.min" %>
+<%= javascript_include_tag "library/atrament.min" %>
+<%= javascript_include_tag "paint" %>
 
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
 <%= link_to("#{@bedsore.bedsore_part.patient.name}さんの個人ページへ", "/patients/#{@bedsore.bedsore_part.patient.id}") %>
@@ -17,14 +18,6 @@
 <div style = "width: 250px;">
   <%= image_tag(@bedsore.image.url, :class => "img-thumbnail") if @bedsore.image?%>
 </div>
-
-<%= javascript_tag do %>
-function drwaing(){
-  if($("#mySketcher").length > 0){
-    const test = <%= raw @bedsore.handwrite_image.url %>;
-    console.log(test)
-  } 
-}
-
-window.onload = drwaing
-<% end %>
+<div style = "width: 250px;">
+  <%= image_tag(@bedsore.handwrite_image.url, :class => "img-thumbnail") if @bedsore.handwrite_image?%>
+</div>
