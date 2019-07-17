@@ -1,70 +1,197 @@
-
-function setupPainter() {
-	
-	const canvas = $("#mySketcher")[0];
+// お絵かき機能のセットアップ
+// 使用ライブラリ
+// https://konvajs.org/
+// 参考
+// https://konvajs.org/docs/sandbox/Free_Drawing.html
+function setupPainter(width,height) {
+	const comments = [{
+		id:10,
+		text:"hello",
+		x:100.11,
+		y:200.5
+	},
+	{
+		id:1,
+		text:"world",
+		x:500,
+		y:200
+	},
+	{
+		id:2,
+		text:"zoi",
+		x:100,
+		y:400
+	}]
+	const canvas = $("#canvas_area")[0];
 	if (canvas) {
-		// 下に置く写真を取得
-		const underImage = $("#under_image");
-		canvas.width = underImage.width();
-		canvas.height = underImage.height();
-		
-		// atrament（お絵かきライブラリ）セットアップ
-		const sketcher = atrament('#mySketcher');
+
+		// 各種画像編集用のUI
 		const saveButton = $("#save_canvas");
 		const clearButton = $("#clear_canvas");
 		const colorSelector = $("#color_canvas");
 		const modeSelector = $("#mode_canvas");
 		const weightRange = $("#weight_canvas");
-		sketcher.weight = 5;
+		const zibaku = $("#zibaku");
 
-		// 以前に書かれた画像を読み込む
-		const image_url = $("#bedsore_handwrite_image").val();
-		const ctx = canvas.getContext('2d');
-		// 画像読み込み
-		const image = new Image();
-		// URLをセットして画像を読み込ませる
-		image.src = image_url;
+		// 大本となるキャンバス(ステージ)作成
+		const stage = new Konva.Stage({
+			container:"canvas_area",
+			width: width,
+			height: height
+		});
 
-		// 読み込み完了時に画像を描画する
-		image.onload = function(){			
-			ctx.drawImage(image, 0, 0);
-		}
+		// 画像表示用レイヤー
+		const iamgeLayer = new Konva.Layer();
+		// 手書き用レイヤー
+		const drawLayer = new Konva.Layer();
+		// 文字表示用レイヤー
+		const textLayer = new Konva.Layer();
 
-		// 手書き画像の保存処理
-    saveButton.on("click", function () {
-      const _form = $(".edit_bedsore")[0];
-      const canvas_data = sketcher.toImage();
-      $("#bedsore_remote_handwrite_image_url").val(canvas_data);
-      $("#bedsore_handwrite_image").val(null);
-      _form.submit();
+		// それぞれのレイヤーをステージに追加
+		stage.add(iamgeLayer, drawLayer, textLayer);
+
+		// 背景画像を読み込んでレイヤーにセット
+		const baseImageURL = $("#bedsore_image_url").val();
+		Konva.Image.fromURL(baseImageURL,function(imageNode){
+			iamgeLayer.add(imageNode);
+			iamgeLayer.batchDraw();
 		});
 		
-		// 書いた文字を全部消す
+		// 手書き画像を読み込んでレイヤーにセット
+		const handwriteImageUrl = $("#bedsore_handwrite_image_url").val();
+		Konva.Image.fromURL(handwriteImageUrl,function(imageNode){
+			drawLayer.add(imageNode);
+			drawLayer.batchDraw();
+		});
+
+		// 保存されていたコメントを表示
+		for (const comment of comments) {
+			const textNode = new Konva.Text({
+				text:comment.text,
+				x:comment.x,
+				y:comment.y,
+				draggable:true,
+				fontSize:20,
+				id:comment.id
+			});
+			textLayer.add(textNode);
+			textLayer.batchDraw();
+		}
+
+		// 手書き用設定
+		let isPainting = false;
+		// ペンの色
+		let strokeColor= '#000000'
+		// ペンの太さ
+		let strokeWidth = 5;
+		// ペンか消しゴムか
+		let mode = 'draw'
+		// 線描画用
+		let lastLine;
+
+		// キャンバスの上でマウスを押したとき
+		stage.on('mousedown touchstart', function(event){
+			// ドラッグ可能なオブジェクト（テキスト等）な場合は線を引かない
+			if(event.target.attrs.draggable){
+				return;
+			}
+
+			isPainting = true;
+      const position = stage.getPointerPosition();
+      lastLine = new Konva.Line({
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+        globalCompositeOperation:
+          mode === 'draw' ? 'source-over' : 'destination-out',
+        points: [position.x, position.y]
+      });
+      drawLayer.add(lastLine);
+		});
+		
+		// キャンバスの上でマウスを離したとき
+		stage.on('mouseup touchend', function(event) {
+			// テキストを移動していた場合は座標を書き換える
+			// jqueryめんどくさい。vueとかreeact使いたい
+			if(event.target.attrs.draggable){
+				const id = event.target.attrs.id;
+				const index = comments.findIndex(function(comment) {
+					return comment.id == id;
+				});
+				comments[index].x = event.target.attrs.x
+				comments[index].y = event.target.attrs.y
+			}
+      isPainting = false;
+		});
+		
+		// キャンバスの上でマウスを押しながら動かしたとき（線を引いてるとき）
+		stage.on('mousemove touchmove', function() {
+			if (!isPainting) {
+				return;
+			}
+
+			const position = stage.getPointerPosition();
+			const newPoints = lastLine.points().concat([position.x, position.y]);
+			lastLine.points(newPoints);
+			stage.batchDraw();
+		});
+
+		// 手書き画像の保存処理
+		saveButton.on("click", function () {
+			const _form = $(".edit_bedsore")[0];
+			const canvas_data = drawLayer.toDataURL();
+			$("#bedsore_handwrite_image_url").val(canvas_data);
+			_form.submit();
+		});
+
+		// 書いた絵を全部消す
 		clearButton.on("click", function () {
-			sketcher.clear();
+			drawLayer.destroyChildren()
+			stage.draw();
+		});
+
+		// 書いた絵を全部消す
+		zibaku.on("click", function () {
+			console.log(textLayer);
+			
 		});
 
 		// ペンの色を変更
 		colorSelector.change(function () {
-			const color = colorSelector.val();
-			sketcher.color = "#" + color
+			strokeColor = "#" + colorSelector.val();
 		});
 
 		// モードを変更
 		modeSelector.change(function () {
-			const mode = modeSelector.val();			
-			sketcher.mode = mode;
+			mode = modeSelector.val();			
 		});
 
 		// 太さ変更
 		weightRange.change(function () {
-			const weight = weightRange.val();			
-			sketcher.weight = parseFloat(weight);
+			strokeWidth = weightRange.val();			
+			// sketcher.weight = parseFloat(weight);
 		});
   } 
 }
 
+function loadImage(){
+	console.log("called");
+	const baseImageURL = $("#bedsore_image_url").val();
+	const image = new Image();
+	image.src = baseImageURL;
+
+	image.onload = function(){
+		const width = image.width;
+		const height = image.height;
+		console.log(width, height);
+		
+		setupPainter(width, height);
+	};
+}
+
+
+
 // ページ読み込み完了時に実行する
-$(document).ready(setupPainter);
+$(document).on('turbolinks:load', loadImage);
+
 // $(document).on('page:load', setupPainter);
 // $(document).on('turbolinks:load', setupPainter);

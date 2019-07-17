@@ -1,5 +1,5 @@
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
-<%= link_to("#{@bedsore.bedsore_part.patient.name}さんの個人ページへ", "/patients/#{@bedsore.bedsore_part.patient.id}") %>
+<%= link_to("褥瘡管理画面へ", {:controller => "bedsores", :bedsore_part_id => @bedsore.bedsore_part.id}) %>
 <p>(撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at %></p>
 <p>褥瘡評価:</p>
 <%= form_with model: @bedsore.design_r, local: true do |form| %>

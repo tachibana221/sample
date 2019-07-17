@@ -31,7 +31,7 @@ class Bedsore < ApplicationRecord
     end
 
     # 手書き画像が投稿された場合は書き換える
-    if params[:remote_handwrite_image_url]
+    if params[:handwrite_image_url]
       # base64で飛んでくるので変換する
       puts today.to_time.to_i.to_s
       # 同じファイル名で上書きしていくとブラウザがキャッシュを使っちゃって古い画像が表示されることがあるので時刻をファイル名にする
