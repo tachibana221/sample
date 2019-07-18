@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'bedsores/:id/paint' => 'bedsores#paint'
   # DesignR
   resources :design_rs
+  # コメント
+  resources :comments
   
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'

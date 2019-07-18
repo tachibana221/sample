@@ -7,8 +7,8 @@ function setupPainter(width,height) {
 	const comments = [{
 		id:10,
 		text:"hello",
-		x:100.11,
-		y:200.5
+		x:100,
+		y:200
 	},
 	{
 		id:1,
@@ -24,6 +24,12 @@ function setupPainter(width,height) {
 	}]
 	const canvas = $("#canvas_area")[0];
 	if (canvas) {
+
+		var url = $('#image_data').data('image-url');
+		var handurl = $('#image_data').data('handwrite-image-url');
+		console.log(url);
+		console.log(handurl);
+		
 
 		// 各種画像編集用のUI
 		const saveButton = $("#save_canvas");
@@ -119,6 +125,8 @@ function setupPainter(width,height) {
 				});
 				comments[index].x = event.target.attrs.x
 				comments[index].y = event.target.attrs.y
+				console.log(comments[index]);
+				
 			}
       isPainting = false;
 		});

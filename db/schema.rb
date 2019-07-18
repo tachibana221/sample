@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_080813) do
+ActiveRecord::Schema.define(version: 2019_07_17_062738) do
 
   create_table "bedsore_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "part_genre"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2019_07_10_080813) do
     t.integer "genre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text"
+    t.integer "position_x"
+    t.integer "position_y"
+    t.bigint "bedsore_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bedsore_id"], name: "index_comments_on_bedsore_id"
   end
 
   create_table "depressure_tools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -121,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_080813) do
   add_foreign_key "care_infos", "nurses"
   add_foreign_key "care_infos", "nurses", column: "comment_editor_id"
   add_foreign_key "care_infos", "nurses", column: "image_editor_id"
+  add_foreign_key "comments", "bedsores"
   add_foreign_key "design_rs", "bedsores"
   add_foreign_key "patients", "nurses", column: "image_editor_id"
   add_foreign_key "patients", "nurses", column: "topics_editor_id"

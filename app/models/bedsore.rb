@@ -5,6 +5,8 @@ class Bedsore < ApplicationRecord
   belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
   belongs_to :nurse, optional: true
 
+  has_many :comments, dependent: :destroy
+
   has_one :design_r, dependent: :destroy, class_name: "DesignR"
 
   # 画像投稿用
