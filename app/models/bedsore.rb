@@ -17,8 +17,11 @@ class Bedsore < ApplicationRecord
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
     today = Time.now
-    self.comment = params[:comment]
-    self.nurse = nurse
+
+    if params[:comment]
+      self.comment = params[:comment]
+      self.nurse = nurse
+    end
     
     # 画像が投稿された場合は書き換える
     if params[:image]
@@ -27,19 +30,20 @@ class Bedsore < ApplicationRecord
       self.image_edited_at = today
     end
 
-    # 画像が投稿された場合は書き換える
+    # 手書き画像が投稿された場合は書き換える
     if params[:handwrite_image]
       self.handwrite_image = params[:handwrite_image]
     end
 
     # 手書き画像が投稿された場合は書き換える
+    # deta urlで送られてきた場合は変換する
     if params[:handwrite_image_url]
+      puts "hogeeeeeeeee"
+      puts params
       # base64で飛んでくるので変換する
-      puts today.to_time.to_i.to_s
       # 同じファイル名で上書きしていくとブラウザがキャッシュを使っちゃって古い画像が表示されることがあるので時刻をファイル名にする
-      image_data =  base64_conversion(params[:remote_handwrite_image_url], "handwrite_" + today.strftime('%Y%m%d%H%M%S'))
+      image_data =  base64_conversion(params[:handwrite_image_url], "handwrite_" + today.strftime('%Y%m%d%H%M%S'))
       self.handwrite_image = image_data
-      self.remote_handwrite_image_url = nil
     end
   end
 end

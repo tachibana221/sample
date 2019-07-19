@@ -1,4 +1,3 @@
-<%= javascript_include_tag "library/atrament.min" %>
 <%= javascript_include_tag "library/konva.min" %>
 <%= javascript_include_tag "paint" %>
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>褥瘡画像を編集</h1>
@@ -56,15 +55,12 @@
 
   <div id="canvas_area"></div>
 
-  <%# Controllerからjavascriptに変数を渡すために一旦非表示のformを作る %>
+  <%# Controllerからjavascriptに変数を渡すために一旦非表示のdata属性に入れとく %>
   <div id="image_data" 
     data-image-url="<%= @bedsore.image.url %>"
     data-handwrite-image-url="<%= @bedsore.handwrite_image.url %>"
+    data-comments="<%= @bedsore.handwrite_image.url %>"
+    data-bedsore-id="<%= @bedsore.id %>"
   ></div>
-
-  <%= form_for(@bedsore) do |form| %>
-    <%= form.hidden_field :handwrite_image_url %>
-    <%= form.hidden_field :image_url %>
-  <% end %>
 
 </div>

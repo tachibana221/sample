@@ -24,12 +24,7 @@ function setupPainter(width,height) {
 	}]
 	const canvas = $("#canvas_area")[0];
 	if (canvas) {
-
-		var url = $('#image_data').data('image-url');
-		var handurl = $('#image_data').data('handwrite-image-url');
-		console.log(url);
-		console.log(handurl);
-		
+		const bedsoreID = $('#image_data').data('bedsore-id');
 
 		// 各種画像編集用のUI
 		const saveButton = $("#save_canvas");
@@ -57,14 +52,14 @@ function setupPainter(width,height) {
 		stage.add(iamgeLayer, drawLayer, textLayer);
 
 		// 背景画像を読み込んでレイヤーにセット
-		const baseImageURL = $("#bedsore_image_url").val();
+		const baseImageURL = $('#image_data').data('image-url');
 		Konva.Image.fromURL(baseImageURL,function(imageNode){
 			iamgeLayer.add(imageNode);
 			iamgeLayer.batchDraw();
 		});
 		
 		// 手書き画像を読み込んでレイヤーにセット
-		const handwriteImageUrl = $("#bedsore_handwrite_image_url").val();
+		const handwriteImageUrl = $('#image_data').data('handwrite-image-url');
 		Konva.Image.fromURL(handwriteImageUrl,function(imageNode){
 			drawLayer.add(imageNode);
 			drawLayer.batchDraw();
@@ -145,10 +140,16 @@ function setupPainter(width,height) {
 
 		// 手書き画像の保存処理
 		saveButton.on("click", function () {
-			const _form = $(".edit_bedsore")[0];
+			// const _form = $(".edit_bedsore")[0];
 			const canvas_data = drawLayer.toDataURL();
-			$("#bedsore_handwrite_image_url").val(canvas_data);
-			_form.submit();
+			$.ajax({
+				url: '/bedsores/'+bedsoreID, 
+				type: "POST", 
+				data:{
+					handwrite_image_url:canvas_data,
+					_method:'PUT',
+				}
+			});
 		});
 
 		// 書いた絵を全部消す
@@ -183,7 +184,7 @@ function setupPainter(width,height) {
 
 function loadImage(){
 	console.log("called");
-	const baseImageURL = $("#bedsore_image_url").val();
+	const baseImageURL = $('#image_data').data('image-url');
 	const image = new Image();
 	image.src = baseImageURL;
 
@@ -196,10 +197,8 @@ function loadImage(){
 	};
 }
 
-
-
 // ページ読み込み完了時に実行する
+// イベントが多重登録されないようにoffをする
+// https://qiita.com/nekoneko-wanwan/items/3d3da95f1127f743397d
+$(document).off('turbolinks:load');
 $(document).on('turbolinks:load', loadImage);
-
-// $(document).on('page:load', setupPainter);
-// $(document).on('turbolinks:load', setupPainter);

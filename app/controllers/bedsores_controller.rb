@@ -38,9 +38,11 @@ class BedsoresController < ApplicationController
   end
 
   def update
+
     @bedsore = Bedsore.find(params[:id])
-    @bedsore.update(params[:bedsore], current_nurse)
+    @bedsore.update(params, current_nurse)
     if @bedsore.save()
+      puts "saved!!!!!!!!!!!!!!!!!!"
       flash[:notice] = '褥瘡情報を更新しました'
       redirect_back(fallback_location: root_path)
     end
