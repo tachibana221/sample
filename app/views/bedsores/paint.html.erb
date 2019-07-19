@@ -4,7 +4,8 @@
 <%= link_to("褥瘡ページに戻る", "/bedsores/#{@bedsore.id}") %>
 <div>
 
-  <%# コメント一覧 %>
+  <h3>コメント一覧</h3>
+  <%= link_to("コメント新規登録", {:controller => "comments", :action => "new", :bedsore_id => @bedsore.id},class:"btn btn-primary") %>
   <div>
     <% @bedsore.comments.each do |comment| %>
       <div class="list-group-item d-flex justify-content-between">
@@ -14,12 +15,14 @@
           </div>
         </div>
         <div>
+          <%= link_to("コメントを編集", "/comments/#{comment.id}/edit",class:"btn btn-primary btn-sm") %>
           <%= link_to("削除", "/comments/#{comment.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
         </div>
       </div>
     <% end %>
   </div>
 
+  <h3>画像を編集</h3>
   <div>
     <div class="form-row">
       <div class="form-group col-md-2">

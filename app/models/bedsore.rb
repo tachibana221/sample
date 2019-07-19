@@ -55,17 +55,10 @@ class Bedsore < ApplicationRecord
 
   # 画像上に表示する複数のコメントを更新する
   def updateComments(new_comments)
-    new_comments.each_pair do |key, value|
-      self.updateComment(value)
+    new_comments.each_pair do |_, value|
+      comment = self.comments.find(value[:id])
+      comment.update(value)
+      comment.save()
     end
-  end
-
-  # 画像上に表示するコメントを更新する
-  def updateComment(new_comment)
-    comment = self.comments.find(new_comment[:id])
-    comment.position_x = new_comment[:position_x]
-    comment.position_y = new_comment[:position_y]
-    comment.text = new_comment[:text]
-    comment.save()
   end
 end
