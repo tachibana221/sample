@@ -59,7 +59,7 @@
   <div id="image_data" 
     data-image-url="<%= @bedsore.image.url %>"
     data-handwrite-image-url="<%= @bedsore.handwrite_image.url %>"
-    data-comments="<%= @bedsore.handwrite_image.url %>"
+    data-comments="<%= @bedsore.comments.as_json().to_json() %>"
     data-bedsore-id="<%= @bedsore.id %>"
   ></div>
 

@@ -1,4 +1,8 @@
 # 褥瘡
+
+# 褥瘡に対する備考的な使いかたをするcommentカラムと
+# 画像上に表示させるコメントを持つcommentsカラムがある
+# TODO:あとで片方をリネームする
 class Bedsore < ApplicationRecord
   include CarrierwaveBase64Uploader
   belongs_to :bedsore_part
@@ -13,6 +17,10 @@ class Bedsore < ApplicationRecord
   # carrierwaveのおまじない
   mount_uploader :image, ImageUploader
   mount_uploader :handwrite_image, ImageUploader
+
+  def comments_by_day
+    comments.by_day_hash
+  end
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
@@ -38,12 +46,26 @@ class Bedsore < ApplicationRecord
     # 手書き画像が投稿された場合は書き換える
     # deta urlで送られてきた場合は変換する
     if params[:handwrite_image_url]
-      puts "hogeeeeeeeee"
-      puts params
       # base64で飛んでくるので変換する
       # 同じファイル名で上書きしていくとブラウザがキャッシュを使っちゃって古い画像が表示されることがあるので時刻をファイル名にする
       image_data =  base64_conversion(params[:handwrite_image_url], "handwrite_" + today.strftime('%Y%m%d%H%M%S'))
       self.handwrite_image = image_data
     end
+  end
+
+  # 画像上に表示する複数のコメントを更新する
+  def updateComments(new_comments)
+    new_comments.each_pair do |key, value|
+      self.updateComment(value)
+    end
+  end
+
+  # 画像上に表示するコメントを更新する
+  def updateComment(new_comment)
+    comment = self.comments.find(new_comment[:id])
+    comment.position_x = new_comment[:position_x]
+    comment.position_y = new_comment[:position_y]
+    comment.text = new_comment[:text]
+    comment.save()
   end
 end

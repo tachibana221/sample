@@ -4,27 +4,10 @@
 // 参考
 // https://konvajs.org/docs/sandbox/Free_Drawing.html
 function setupPainter(width,height) {
-	const comments = [{
-		id:10,
-		text:"hello",
-		x:100,
-		y:200
-	},
-	{
-		id:1,
-		text:"world",
-		x:500,
-		y:200
-	},
-	{
-		id:2,
-		text:"zoi",
-		x:100,
-		y:400
-	}]
 	const canvas = $("#canvas_area")[0];
 	if (canvas) {
 		const bedsoreID = $('#image_data').data('bedsore-id');
+		const comments = $('#image_data').data('comments')
 
 		// 各種画像編集用のUI
 		const saveButton = $("#save_canvas");
@@ -69,10 +52,10 @@ function setupPainter(width,height) {
 		for (const comment of comments) {
 			const textNode = new Konva.Text({
 				text:comment.text,
-				x:comment.x,
-				y:comment.y,
+				x:comment.position_x,
+				y:comment.position_y,
 				draggable:true,
-				fontSize:20,
+				fontSize:25,
 				id:comment.id
 			});
 			textLayer.add(textNode);
@@ -118,10 +101,8 @@ function setupPainter(width,height) {
 				const index = comments.findIndex(function(comment) {
 					return comment.id == id;
 				});
-				comments[index].x = event.target.attrs.x
-				comments[index].y = event.target.attrs.y
-				console.log(comments[index]);
-				
+				comments[index].position_x = event.target.attrs.x;
+				comments[index].position_y = event.target.attrs.y;
 			}
       isPainting = false;
 		});
@@ -147,6 +128,7 @@ function setupPainter(width,height) {
 				type: "POST", 
 				data:{
 					handwrite_image_url:canvas_data,
+					comments:comments,
 					_method:'PUT',
 				}
 			});
@@ -182,17 +164,17 @@ function setupPainter(width,height) {
   } 
 }
 
+// 画像サイズを取得したいので一旦画像を読み込む
 function loadImage(){
 	console.log("called");
 	const baseImageURL = $('#image_data').data('image-url');
 	const image = new Image();
 	image.src = baseImageURL;
 
+	// 読み込み完了後、お絵かきアプリのセットアップを行う。
 	image.onload = function(){
 		const width = image.width;
 		const height = image.height;
-		console.log(width, height);
-		
 		setupPainter(width, height);
 	};
 }
