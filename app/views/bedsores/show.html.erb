@@ -1,0 +1,13 @@
+<h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
+<%= link_to("褥瘡管理画面へ", {:controller => "bedsores", :bedsore_part_id => @bedsore.bedsore_part.id}) %>
+<p>(撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at %></p>
+<p>褥瘡評価:</p>
+<%= form_with model: @bedsore.design_r, local: true do |form| %>
+  <%= render :partial => 'design_r_form', :locals => {:form => form} %>
+<% end %>
+<h3>褥瘡画像</h3>
+<%= link_to("画像を編集", "/bedsores/#{@bedsore.id}/paint") %>
+<div class="container" style="position: relative;">
+  <%= image_tag(@bedsore.image.url, :class => "img-fluid", :style => "position: absolute; z-index:0;") if @bedsore.image?%>
+  <%= image_tag(@bedsore.handwrite_image.url, :class => "img-fluid", :style => "position: absolute; z-index:1;") if @bedsore.handwrite_image?%>
+</div>

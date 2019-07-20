@@ -1,0 +1,23 @@
+<h1><%= @bedsore_part.patient.name %>さんの<%= @bedsore_part.part_name %>の褥瘡一覧</h1>
+<%= link_to("#{@bedsore_part.patient.name}さんの個人ページへ", "/patients/#{@bedsore_part.patient.id}") %>
+<div>
+  <%= link_to("褥瘡情報登録", {:controller => "bedsores", :action => "new", :bedsore_part_id => @bedsore_part.id},class:"btn btn-primary") %>
+</div>
+<div class="list-group">
+  <% @bedsore_part.bedsores.each do |bedsore| %>
+    <div class="list-group-item d-flex justify-content-between">
+      <div class="d-flex flex-row" style = "flex:1">
+        <div style = "width: 150px;">
+          <%= image_tag(bedsore.image.url, :class => "img-thumbnail") if bedsore.image?%>
+        </div>
+        <div class="ml-3 flex-grow-1" style="flex:1">
+          <%= bedsore.comment %>
+        </div>
+      </div>
+      <div>
+        <%= link_to("詳細", "/bedsores/#{bedsore.id}", class:"btn btn-primary btn-sm") %>
+        <%= link_to("削除", "/bedsores/#{bedsore.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+      </div>
+    </div>
+  <% end %>
+</div>

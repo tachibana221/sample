@@ -9,14 +9,14 @@ class CareInfosController < ApplicationController
     @care_info = CareInfo.find(care_info_id) 
   end
 
-  def edit
-    care_info_id = params[:id]
-    @care_info = CareInfo.find(care_info_id)  
-  end
-
   def new
     bedsore_part_id = params[:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)  
+  end
+
+  def edit
+    care_info_id = params[:id]
+    @care_info = CareInfo.find(care_info_id)  
   end
 
   def create
@@ -27,6 +27,15 @@ class CareInfosController < ApplicationController
     if care_info.save()
       flash[:notice] = '新しくケア情報を登録しました'
       redirect_to :action => "index", :bedsore_part_id => bedsore_part_id
+    end
+  end
+
+  def update
+    @care_info = CareInfo.find(params[:id])
+    @care_info.update(params[:care_info], current_nurse)
+    if @care_info.save()
+      flash[:notice] = 'ケア情報を更新しました'
+      redirect_to :action => "index", :bedsore_part_id => @care_info.bedsore_part.id
     end
   end
 
