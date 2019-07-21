@@ -1,5 +1,7 @@
 <h3>ケア物品一覧</h3>
-<%= link_to("ケア物品登録", "/care_tools/new", class: "btn btn-link") %>
+<div class="mt-1 mb-2">
+  <%= link_to("ケア物品登録", "/care_tools/new", class: "btn btn-primary") %>
+</div>
 <div class="list-group">
   <% @tools.each do |tool| %>
     <div class="list-group-item d-flex justify-content-between align-items-center">

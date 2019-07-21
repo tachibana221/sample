@@ -1,6 +1,6 @@
 <h1><%= @bedsore_part.patient.name %>さんの<%= @bedsore_part.part_name %>に関するケア情報</h1>
 <%= link_to("#{@bedsore_part.patient.name}さんの個人ページへ", "/patients/#{@bedsore_part.patient.id}") %>
-<div>
+<div class="mt-1 mb-2">
   <%= link_to("ケア情報新規登録", {:controller => "care_infos", :action => "new", :bedsore_part_id => @bedsore_part.id},class:"btn btn-primary") %>
 </div>
 <div class="list-group">
