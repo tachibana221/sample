@@ -6,6 +6,7 @@
 <p>撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at.strftime("%Y年%m月%d日 %H時%M分") if !@bedsore.image_edited_at.nil? %></p>
 <p>褥瘡評価:</p>
 <h3>Design-情報</h3>
+<%= link_to("編集", "/design_rs/#{@bedsore.design_r.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
 <div class="container">
   <%= form_with model: @bedsore.design_r, local: true do |form| %>
     <%= render :partial => 'design_r_form', :locals => {:form => form} %>
@@ -14,11 +15,6 @@
 <h3>褥瘡画像</h3>
 <div class="container">
   <%= link_to("画像を編集", "/bedsores/#{@bedsore.id}/paint", :class => "btn btn-primary mt-1 mb-2") %>
-  <%
-=begin%>
- <%= image_tag(@bedsore.image.url, :class => "img-fluid", :style => "") if @bedsore.image?%> 
-<%
-=end%>
   <div id="canvas_area"></div>
   <div id="image_data" 
   data-image-url="<%= @bedsore.image.url %>"

@@ -1,2 +1,53 @@
-<h1>DesignRs#edit</h1>
-<p>Find me in app/views/design_rs/edit.html.erb</p>
+<h3>Design-R情報</h3>
+<div class="container">
+  <%= form_with model: @designR, local: true do |form| %>
+    <div class="form-group">
+      <%= form.label :"深さ"%>
+      <%= form.select :depth, DesignR.depths.keys.to_a, {}, { class: "custom-select" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :"滲出液"%>
+      <%= form.select :exudate, DesignR.exudates.keys.to_a, {}, { class: "custom-select" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :"大きさ"%>
+      <div class="form-row container">
+        <div class="form-group col">
+          <%= form.label :"短径(cm)"%>
+          <%= form.number_field :size_minor_axis, class: "form-control", id: "size_minor_axis"  %>
+        </div>
+        <div class="form-group col">
+          <%= form.label :"長径(cm)"%>
+          <%= form.number_field :size_major_axis, class: "form-control", id: "size_major_axis"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label :"炎症/感染"%>
+      <%= form.select :inflammation, DesignR.inflammations.keys.to_a, {}, { class: "custom-select" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :"肉芽組織"%>
+      <%= form.select :granule_tissue, DesignR.granule_tissues.keys.to_a, {}, { class: "custom-select" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :"壊死組織"%>
+      <%= form.select :necrotic_tissue, DesignR.necrotic_tissues.keys.to_a, {}, { class: "custom-select" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :"ポケット"%>
+      <div class="form-row container">
+        <div class="form-group col-md-6">
+              <%= form.label :"短径(cm)"%>
+          <%= form.number_field :pocket_minor_axis, class: "form-control", id: "size_minor_axis"  %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :"長径(cm)"%>
+          <%= form.number_field :pocket_major_axis, class: "form-control", id: "size_major_axis"  %>
+        </div>
+      </div>
+    </div>
+    <%= form.submit "登録", class: "btn btn-primary" %>
+  <% end %>
+ <%= image_tag(@designR.bedsore.image.url, :class => "img-fluid", :style => "") if @designR.bedsore.image?%> 
+</div>

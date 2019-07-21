@@ -7,12 +7,14 @@
   <%= form.select :exudate, DesignR.exudates.keys.to_a, {}, { class: "custom-select" } %>
 </div>
 <div class="form-group">
-  <%= form.label :"大きさ(短径cm x 長径cm)"%>
-  <div class="form-row">
-    <div class="form-group col-md-6">
+  <%= form.label :"大きさ"%>
+  <div class="form-row container">
+    <div class="form-group col">
+      <%= form.label :"短径(cm)"%>
       <%= form.number_field :size_minor_axis, class: "form-control", id: "size_minor_axis"  %>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col">
+      <%= form.label :"長径(cm)"%>
       <%= form.number_field :size_major_axis, class: "form-control", id: "size_major_axis"  %>
     </div>
   </div>
@@ -30,12 +32,14 @@
   <%= form.select :necrotic_tissue, DesignR.necrotic_tissues.keys.to_a, {}, { class: "custom-select" } %>
 </div>
 <div class="form-group">
-  <%= form.label :"ポケット(短径cm x 長径cm)"%>
-  <div class="form-row">
+  <%= form.label :"ポケット"%>
+  <div class="form-row container">
     <div class="form-group col-md-6">
+          <%= form.label :"短径(cm)"%>
       <%= form.number_field :pocket_minor_axis, class: "form-control", id: "size_minor_axis"  %>
     </div>
     <div class="form-group col-md-6">
+      <%= form.label :"長径(cm)"%>
       <%= form.number_field :pocket_major_axis, class: "form-control", id: "size_major_axis"  %>
     </div>
   </div>
