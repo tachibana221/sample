@@ -1,5 +1,6 @@
-<%= javascript_include_tag "library/konva.min" %>
-<%= javascript_include_tag "paint" %>
+<%= javascript_include_tag "konva.min" %>
+<%= javascript_include_tag "setupPainter" %>
+
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>褥瘡画像を編集</h1>
 <%= link_to("褥瘡ページに戻る", "/bedsores/#{@bedsore.id}") %>
 <div>

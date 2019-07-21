@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root 'home#top'
 
   # これでそれぞれにrouteingを書かなくてもいい感じにしてくれる
-  # まじでon railsってかんじ
   # https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
   # 療養者
   resources :patients

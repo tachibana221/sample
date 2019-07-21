@@ -12,6 +12,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += %w( library/atrament.min.js )
-Rails.application.config.assets.precompile += %w( library/konva.min.js )
-Rails.application.config.assets.precompile += %w( paint.js )
+Rails.application.config.assets.precompile += %w( konva.min.js )
+Rails.application.config.assets.precompile += %w( setupPainter.js )
