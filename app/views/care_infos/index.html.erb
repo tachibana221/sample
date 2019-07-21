@@ -5,18 +5,16 @@
 </div>
 <div class="list-group">
   <% @bedsore_part.care_infos.each do |care_info| %>
-    <div class="list-group-item d-flex justify-content-between">
-      <div class="d-flex flex-row" style = "flex:1">
-        <div style = "width: 150px;">
-          <%= image_tag(care_info.image.url, :class => "img-thumbnail") if care_info.image?%>
-        </div>
-        <div class="ml-3 flex-grow-1" style="flex:1">
-          <%= care_info.comment %>
-        </div>
+    <div class="row list-item position-relative">
+      <div class="col-md-3 mb-md-0 p-md-4">
+          <%= link_to(image_tag(care_info.image.url, :class => "img-thumbnail"), "/care_infos/#{care_info.id}") if care_info.image?%>
       </div>
-      <div>
-        <%= link_to("編集", "/care_infos/#{care_info.id}/edit", class:"btn btn-primary btn-sm") %>
-        <%= link_to("削除", "/care_infos/#{care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+      <div class="col position-static p-4 pl-md-0">
+        <%= care_info.comment %>
+        <div class="d-flex justify-content-end">
+          <%= link_to("詳細", "/care_infos/#{care_info.id}", class:"btn btn-info btn-sm m-1") %>
+          <%= link_to("削除", "/care_infos/#{care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm m-1") %>
+        </div>
       </div>
     </div>
   <% end %>

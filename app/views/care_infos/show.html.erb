@@ -1,2 +1,9 @@
-<h1>CareInfos#show</h1>
-<p>Find me in app/views/care_infos/show.html.erb</p>
+<h1>ケア物品詳細</h1>
+<%= link_to("ケア情報一覧へ戻る", {:controller => "care_infos", :bedsore_part_id => @care_info.bedsore_part.id},class:"btn btn-link") %>
+<div class="posts-index-item">
+    <p>コメント:<%= @care_info.comment %></p>
+    <%= image_tag(@care_info.image.url, :class => "img-fluid") if @care_info.image?%>
+</div>
+<%= link_to("編集", "/care_infos/#{@care_info.id}/edit", class:"btn btn-primary") %>
+<%= link_to("削除", "/care_infos/#{@care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
+

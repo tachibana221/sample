@@ -16,7 +16,7 @@
     <%# 本体 %>
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <div class="mt-2 alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
       <%# ここに書くページのerbが読み込まれる %>
       <%= yield %>
