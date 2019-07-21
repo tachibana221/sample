@@ -1,3 +1,4 @@
+# base64でアップロードされた画像を変換して保存する
 # https://blog.hello-world.jp.net/ruby/2281/
 module CarrierwaveBase64Uploader
   extend ActiveSupport::Concern

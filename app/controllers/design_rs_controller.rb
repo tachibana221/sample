@@ -1,4 +1,7 @@
 class DesignRsController < ApplicationController
+  # ログイン済みのユーザーかどうかのチェック
+  before_action :login_check
+  
   def index
   end
 

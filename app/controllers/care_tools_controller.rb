@@ -1,7 +1,7 @@
 # ケア物品コントローラー
 class CareToolsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
-  before_action :login_check, only: [:new, :edit, :update, :destroy]
+  before_action :login_check
 
   # 一覧ページ
   def index

@@ -1,4 +1,7 @@
 class CareInfosController < ApplicationController
+  # ログイン済みのユーザーかどうかのチェック
+  before_action :login_check
+  
   def index
     bedsore_part_id = params[:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)

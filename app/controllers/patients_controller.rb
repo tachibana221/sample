@@ -2,7 +2,7 @@
 require 'date'
 class PatientsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
-  before_action :login_check, only: [:new, :edit, :update, :destroy]
+  before_action :login_check
 
   # 一覧ページ
   def index

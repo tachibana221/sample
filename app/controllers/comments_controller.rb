@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  # ログイン済みのユーザーかどうかのチェック
+  before_action :login_check
+  
   def index
     @comments = Comment.all()
   end
