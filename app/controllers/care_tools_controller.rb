@@ -28,7 +28,7 @@ class CareToolsController < ApplicationController
     @tool = CareTool.new()
     @tool.update(params[:care_tool])
     if @tool.save()
-      flash[:notice] = '新しくケア物品を登録しました'
+      flash[:primary] = '新しくケア物品を登録しました'
       redirect_to('/care_tools')
     else
       render('care_tools/new')
@@ -40,7 +40,7 @@ class CareToolsController < ApplicationController
     @tool = CareTool.find_by(id: params[:id])
     @tool.update(params[:care_tool])
     if @tool.save()
-      flash[:notice] = '新しくケア物品を登録しました'
+      flash[:primary] = '新しくケア物品を登録しました'
       redirect_to('/care_tools')
     else
       render('care_tools/new')

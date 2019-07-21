@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     comment = @bedsore.comments.build()
     comment.update(params[:comment])
     if comment.save()
-      flash[:notice] = '新しくコメントを登録しました'
+      flash[:primary] = '新しくコメントを登録しました'
       redirect_back(fallback_location: root_path)
     end
   end
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     puts params
     @comment.update(params[:comment])
     if @comment.save()
-      flash[:notice] = 'コメントを更新しました'
+      flash[:primary] = 'コメントを更新しました'
       redirect_back(fallback_location: root_path)
     end
   end

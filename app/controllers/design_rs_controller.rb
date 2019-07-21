@@ -18,7 +18,7 @@ class DesignRsController < ApplicationController
     @designR = DesignR.find(params[:id])
     @designR.update(params[:design_r])
     if @designR.save()
-      flash[:notice] = 'DesignR情報を更新しました'
+      flash[:primary] = 'DesignR情報を更新しました'
       redirect_back(fallback_location: root_path)
     end
   end

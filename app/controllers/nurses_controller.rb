@@ -28,7 +28,7 @@ class NursesController < ApplicationController
     # フォームの値取り出し
     @nurse.update(params[:nurse])
     if @nurse.save()
-      flash[:notice] = '新しく看護師を登録しました'
+      flash[:primary] = '新しく看護師を登録しました'
       redirect_to('/nurses')
     else
       render('nurses/new')
@@ -41,7 +41,7 @@ class NursesController < ApplicationController
     # フォームの値取り出し
     @nurse.update(params[:nurse])
     if @nurse.save()
-      flash.now[:notice] = '登録情報を更新しました'
+      flash.now[:primary] = '登録情報を更新しました'
       redirect_to("/nurses/#{params[:id]}")
     else
       render("nurses/edit")

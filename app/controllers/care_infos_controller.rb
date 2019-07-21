@@ -28,7 +28,7 @@ class CareInfosController < ApplicationController
     care_info = @bedsore_part.care_infos.build()
     care_info.update(params, current_nurse)
     if care_info.save()
-      flash[:notice] = '新しくケア情報を登録しました'
+      flash[:primary] = '新しくケア情報を登録しました'
       redirect_to :action => "index", :bedsore_part_id => bedsore_part_id
     end
   end
@@ -37,7 +37,7 @@ class CareInfosController < ApplicationController
     @care_info = CareInfo.find(params[:id])
     @care_info.update(params[:care_info], current_nurse)
     if @care_info.save()
-      flash[:notice] = 'ケア情報を更新しました'
+      flash[:primary] = 'ケア情報を更新しました'
       redirect_to :action => "index", :bedsore_part_id => @care_info.bedsore_part.id
     end
   end

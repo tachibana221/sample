@@ -28,7 +28,7 @@ class DepressureToolsController < ApplicationController
     @tool = DepressureTool.new()
     @tool.update(params[:depressure_tool])
     if @tool.save()
-      flash[:notice] = '新しく除圧用具を登録しました'
+      flash[:primary] = '新しく除圧用具を登録しました'
       redirect_to('/depressure_tools')
     else
       render('depressure_tools/new')
@@ -40,7 +40,7 @@ class DepressureToolsController < ApplicationController
     @tool = DepressureTool.find_by(id: params[:id])
     @tool.update(params[:depressure_tool])
     if @tool.save()
-      flash[:notice] = '新しく除圧用具を登録しました'
+      flash[:primary] = '新しく除圧用具を登録しました'
       redirect_to('/depressure_tools')
     else
       render('depressure_tools/new')

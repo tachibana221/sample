@@ -1,5 +1,5 @@
 <h3>療養者情報編集</h3>
-<%= link_to("一覧へ戻る", "/patients", class:"btn btn-link") %>
+<%= link_to("療法者情報へ戻る", "/patients/#{@patient.id}", class:"btn btn-link") %>
 <%# エラー表示 %>
 <div class="col">
   <% @patient.errors.full_messages.each do |message|%>

@@ -1,6 +1,6 @@
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
 <%= link_to("褥瘡管理画面へ", {:controller => "bedsores", :bedsore_part_id => @bedsore.bedsore_part.id}) %>
-<p>(撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at %></p>
+<p>撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at.strftime("%Y年%m月%d日 %H時%M分") if !@bedsore.image_edited_at.nil? %></p>
 <p>褥瘡評価:</p>
 <%= form_with model: @bedsore.design_r, local: true do |form| %>
   <%= render :partial => 'design_r_form', :locals => {:form => form} %>

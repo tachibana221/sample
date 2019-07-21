@@ -19,7 +19,7 @@ class BedsorePartsController < ApplicationController
     bedsore_part = @patient.bedsore_parts.build()
     bedsore_part.update(params, current_nurse)
     if bedsore_part.save()
-      flash[:notice] = '新しく褥瘡部位を登録しました'
+      flash[:primary] = '新しく褥瘡部位を登録しました'
       redirect_back(fallback_location: root_path)
     end
   end

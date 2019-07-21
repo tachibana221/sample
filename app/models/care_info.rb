@@ -10,7 +10,7 @@ class CareInfo < ApplicationRecord
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
-    today = Date.today.to_time
+    today = Time.now
     # コメントが入力されてかつ、値が変更されていた場合は書き換える
     if params[:comment] != "" && params[:comment] != self.comment
       self.comment = params[:comment]

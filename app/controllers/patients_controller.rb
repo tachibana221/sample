@@ -30,7 +30,7 @@ class PatientsController < ApplicationController
     # フォームの値取り出し
     @patient.update(params[:patient], current_nurse)
     if @patient.save()
-      flash[:notice] = '新しく療養者を登録しました'
+      flash[:primary] = '新しく療養者を登録しました'
       redirect_to('/patients')
     else
       render('patients/new')
@@ -43,7 +43,7 @@ class PatientsController < ApplicationController
     # フォームの値取り出し
     @patient.update(params[:patient], current_nurse)
     if @patient.save()
-      flash[:notice] = '登録情報を更新しました'
+      flash[:primary] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")
     else
       render("patients/edit")
