@@ -14,7 +14,8 @@
 </div>
 <h3>褥瘡画像</h3>
 <div class="container">
-  <%= link_to("画像を編集", "/bedsores/#{@bedsore.id}/paint", :class => "btn btn-primary mt-1 mb-2") %>
+  <%= link_to("手書きコメント入力", "/bedsores/#{@bedsore.id}/paint", :class => "btn btn-primary mt-1 mb-2") %>
+  <%= link_to("画像を変更", "/bedsores/#{@bedsore.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
   <div id="canvas_area"></div>
   <div id="image_data" 
   data-image-url="<%= @bedsore.image.url %>"

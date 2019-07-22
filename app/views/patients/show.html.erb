@@ -9,17 +9,13 @@
   <p>トピック:<%= @patient.topics %></p>
   <p>トピック編集者:<%= @patient.topics_editor.name if !@patient.topics_editor.nil? %></p>
   <p>トピック更新日時:<%= @patient.topics_updated_at.strftime("%Y年%m月%d日 %H時%M分") if !@patient.topics_updated_at.nil? %></p>
-  <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
-  <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
-</div>
-<h3>療養者画像</h3>
-<div class="container">
   <div style="width: 18rem;">
     <%= image_tag(@patient.image.url, :class => "img-thumbnail") if @patient.image?%>
   </div>
   <p>画像編集者:<%= @patient.image_editor.name if !@patient.image_editor.nil? %></p>
   <p>画像撮影日時:<%= @patient.image_updated_at.strftime("%Y年%m月%d日 %H時%M分") if !@patient.image_updated_at.nil?%></p>
-  <%= link_to("画像を登録", "/patients/#{@patient.id}/image_form", class:"btn btn-primary") %>
+  <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
+  <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
 </div>
 <hr/>
 <h3>褥瘡部位</h3>

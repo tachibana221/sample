@@ -1,23 +1,16 @@
-<h1>褥瘡情報を新規登録</h1>
-<%= form_with model: @bedsore, local: true do |form| %>
-  <%= form.hidden_field :bedsore_part_id, :value => @bedsore.bedsore_part.id %>
-  <div class="modal-body">
-    <div class="form-group">
-      <%= form.label :"コメント"%>
-      <%= form.text_area :comment, class: "form-control", id: "comment" %>
-    </div>
-    <div style="width:200px">
-      <%= image_tag(@bedsore.image.url, :class => "img-thumbnail") if @bedsore.image?%>
-    </div>
+<%= javascript_include_tag "imageResize" %>
 
+<h1>褥瘡情報を編集</h1>
+<%= form_with model: @bedsore, id:"image-form", local: true do |form| %>
+  <%= form.hidden_field :image_base64, id: "image-base64" %>
+  <div class="form-group">
+    <%= form.label :"コメント"%>
+    <%= form.text_area :comment, class: "form-control", id: "topics" %>
+  </div>
+  <div class="modal-body">
     <div class="form-group custom-file">
-      <p><%= form.label :"画像を変更"%></p>
-      <%= form.file_field :image,  id: "image" %>
+      <%= form.file_field :image,  id: "image-file" %>
     </div>
-    
   </div>
-  <div class="modal-footer">
-    <%= form.submit "登録", class: "btn btn-primary" %>
-  </div>
-  
 <% end %>
+<button class="btn btn-primary" id="upload-button">登録</button>
