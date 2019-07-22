@@ -24,6 +24,11 @@ class PatientsController < ApplicationController
     @patient = Patient.find_by(id: params[:id])
   end
 
+  # 編集ページ
+  def image_form
+    @patient = Patient.find_by(id: params[:id])
+  end
+
   # 新規作成メソッド
   def create
     @patient = Patient.new()
@@ -42,6 +47,18 @@ class PatientsController < ApplicationController
     @patient = Patient.find_by(id: params[:id])
     # フォームの値取り出し
     @patient.update(params[:patient], current_nurse)
+    if @patient.save()
+      flash[:primary] = '登録情報を更新しました'
+      redirect_to("/patients/#{params[:id]}")
+    else
+      render("patients/edit")
+    end
+  end
+
+  def upload_image
+    @patient = Patient.find_by(id: params[:id])
+    # フォームの値取り出し
+    @patient.uploadImage(params, current_nurse)
     if @patient.save()
       flash[:primary] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")

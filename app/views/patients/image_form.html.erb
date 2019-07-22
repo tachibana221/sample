@@ -1,0 +1,38 @@
+<%= javascript_include_tag "imageResize" %>
+
+<h3>画像登録</h3>
+<%= link_to("療養者情報へ戻る", "/patients/#{@patient.id}", class:"btn btn-link") %>
+<div class="container">
+  <%# エラー表示 %>
+  <% @patient.errors.full_messages.each do |message|%>
+    <div class="alert alert-danger" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <%# 編集フォーム %>
+  <%= form_with model: @patient, local: true do |form| %>
+    <div class="form-group custom-file">
+      <%= form.label :"写真"%>
+      <div class="form-group">
+        <%= form.file_field :image, id: "image-file" %>
+      </div>
+    </div>
+    <%
+=begin%>
+ <div class="form-group">
+      <%= form.label :"撮影日時"%>
+      <div class="form-row">
+        <%= form.datetime_select :image_updated_at, {start_year: 1930}, class: 'form-control col-md-2', id: "image-file" %>
+      </div>
+    </div> 
+<%
+=end%>
+  <% end %>
+  <button class="btn btn-primary" id="upload-button">登録</button>
+  <div id="upload_data" 
+    data-model-name="patients"
+    data-image-field-name="image"
+    data-record-id="<%= @patient.id %>"
+  ></div>
+</div>

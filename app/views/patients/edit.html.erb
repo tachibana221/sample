@@ -1,4 +1,3 @@
-<%= javascript_include_tag "imageResize" %>
 <h3>療養者情報編集</h3>
 <%= link_to("療法者情報へ戻る", "/patients/#{@patient.id}", class:"btn btn-link") %>
 <%# エラー表示 %>
@@ -13,11 +12,6 @@
   <%= form_with model: @patient, local: true do |form| %>
     <%# フォーム共通部分呼び出し %>
     <%= render :partial => 'form', :locals => {:form => form} %>
-    <%
-=begin%>
- <%= form.submit :"更新", class:"btn btn-primary" %> 
-<%
-=end%>
+    <%= form.submit :"更新", class:"btn btn-primary" %>
   <% end %>
-  <button class="btn btn-primary" id="upload-button">登録</button>
 </div>
