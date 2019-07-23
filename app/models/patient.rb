@@ -29,23 +29,19 @@ class Patient < ApplicationRecord
       self.topics_editor = nurse
       self.topics_updated_at = today
     end
-  end
 
-  # アップロードされたbase64データを画像に変換して保存
-  def uploadImage(params, nurse)
     # 画像が投稿された場合は書き換える
     if params[:image]
-      today = Time.now
       self.image = base64_conversion(params[:image], "patient_image_" + today.strftime('%Y%m%d%H%M%S'))
       self.image_editor = nurse
-      self.image_updated_at = today
-      # self.image_updated_at = DateTime.new(
-      #   params["image_updated_at(1i)"].to_i,
-      #   params["image_updated_at(2i)"].to_i,
-      #   params["image_updated_at(3i)"].to_i,
-      #   params["image_updated_at(4i)"].to_i,
-      #   params["image_updated_at(5i)"].to_i
-      # )
     end
+    
+    self.image_updated_at = DateTime.new(
+      params["image_updated_at(1i)"].to_i,
+      params["image_updated_at(2i)"].to_i,
+      params["image_updated_at(3i)"].to_i,
+      params["image_updated_at(4i)"].to_i,
+      params["image_updated_at(5i)"].to_i
+    )
   end
 end
