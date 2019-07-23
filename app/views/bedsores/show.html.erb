@@ -15,24 +15,21 @@
   <p>肉芽組織:<span class="h4"><%= @bedsore.design_r.granule_tissue %></span></p>
   <p>壊死組織:<span class="h4"><%= @bedsore.design_r.necrotic_tissue %></span></p>
   <p>ポケット: 短径 <span class="h4"><%= @bedsore.design_r.pocket_minor_axis %></span>cm x 長径 <span class="h4"><%= @bedsore.design_r.pocket_major_axis %></span>cm</p>
-  <%
-=begin%>
- <%= form_with model: @bedsore.design_r, local: true do |form| %>
-    <%= render :partial => 'design_r_form', :locals => {:form => form} %>
-  <% end %> 
-<%
-=end%>
 </div>
 <h3>褥瘡画像</h3>
 <div class="container">
   <%= link_to("手書きコメント入力", "/bedsores/#{@bedsore.id}/paint", :class => "btn btn-primary mt-1 mb-2") %>
-  <%= link_to("画像を変更", "/bedsores/#{@bedsore.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
+  <%= link_to("画像/コメントを変更", "/bedsores/#{@bedsore.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
+  <h4>コメント</h4>
+  <div class="container" >
+    <p style="min-height:100px" class="bg-light border h5"> <%= @bedsore.comment %> </p>
+  </div>
   <div id="canvas_area"></div>
-  <div id="image_data" 
-  data-image-url="<%= @bedsore.image.url %>"
-  data-handwrite-image-url="<%= @bedsore.handwrite_image.url %>"
-  data-comments="<%= @bedsore.comments.as_json().to_json() %>"
-  data-bedsore-id="<%= @bedsore.id %>"
+  <div id="image_data"
+    data-image-url="<%= @bedsore.image.url %>"
+    data-handwrite-image-url="<%= @bedsore.handwrite_image.url %>"
+    data-comments="<%= @bedsore.comments.as_json().to_json() %>"
+    data-bedsore-id="<%= @bedsore.id %>"
 ></div>
 
 </div>

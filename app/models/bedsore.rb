@@ -32,7 +32,7 @@ class Bedsore < ApplicationRecord
     
     # 画像が投稿された場合は書き換える
     # base64を画像に変換
-    if params[:image_base64]
+    if params[:image_base64] && params[:image_base64] != ""
       self.image = base64_conversion(params[:image_base64], "image_" + today.strftime('%Y%m%d%H%M%S'))
       self.image_editor = nurse
       self.image_edited_at = today
@@ -41,7 +41,6 @@ class Bedsore < ApplicationRecord
     # 手書き画像が投稿された場合は書き換える
     # deta urlで送られてきた場合は変換する
     if params[:handwrite_image_url]
-      puts "callllllllllllllllllllllll"
       # base64で飛んでくるので変換する
       # 同じファイル名で上書きしていくとブラウザがキャッシュを使っちゃって古い画像が表示されることがあるので時刻をファイル名にする
       image_data =  base64_conversion(params[:handwrite_image_url], "handwrite_" + today.strftime('%Y%m%d%H%M%S'))

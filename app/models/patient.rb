@@ -32,7 +32,7 @@ class Patient < ApplicationRecord
 
     # 画像が投稿された場合は書き換える
     if params[:image]
-      self.image = base64_conversion(params[:image], "patient_image_" + today.strftime('%Y%m%d%H%M%S'))
+      self.image = params[:image]
       self.image_editor = nurse
     end
     
