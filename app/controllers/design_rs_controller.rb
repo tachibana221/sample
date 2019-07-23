@@ -23,7 +23,7 @@ class DesignRsController < ApplicationController
     @designR.update(params[:design_r])
     if @designR.save()
       flash[:primary] = 'DesignR情報を更新しました'
-      redirect_back(fallback_location: root_path)
+      redirect_to("/bedsores/#{@designR.bedsore.id}")
     end
   end
 end
