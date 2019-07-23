@@ -25,7 +25,7 @@ class DesignR < ApplicationRecord
     "【i0】:局所の炎症徴候": 0, 
     "【i1】:局所の炎症徴候あり(創周囲の発赤、腫脹、熱感)": 1, 
     "【i3】:局所の明らかな感染徴候あり（炎症徴候、膿、悪臭など）": 2, 
-    "【Ii】:全身的影響あり(発熱など)": 3,
+    "【I9】:全身的影響あり(発熱など)": 3,
   }
 
   # 肉芽組織
@@ -56,6 +56,154 @@ class DesignR < ApplicationRecord
     self.necrotic_tissue = params[:necrotic_tissue]
     self.pocket_minor_axis = params[:pocket_minor_axis]
     self.pocket_major_axis = params[:pocket_major_axis]
+  end
+
+  # 「【d0】:皮膚損傷・発赤なし」みたいな文字列から「d0」みたいなコードを取り出す
+  def extractCode(str)
+    return str[/【(.*?)】/, 1]
+  end
+
+  def calcDepthScore()
+    depth = self.depth
+    depthCode = self.extractCode(depth)
+    score = 
+      case depthCode
+        when 'd0' then 0
+        when 'd1' then 1
+        when 'd2' then 2
+        when 'D3' then 3
+        when 'D4' then 4
+        when 'D5' then 5
+        when 'DU' then 5
+        else 0
+      end
+    return score
+  end
+
+  def calcExudateScore()
+    exudate = self.exudate
+    exudateCode = self.extractCode(exudate)
+    score = 
+      case exudateCode
+        when 'e0' then 0
+        when 'e1' then 1
+        when 'e3' then 3
+        when 'E6' then 6
+        else 0
+      end
+    return score
+  end
+
+  def clacSizeScore
+    minor_axis = self.size_minor_axis
+    major_axis = self.size_major_axis
+    size = major_axis * minor_axis
+    score = 
+      case size
+        when 0 then 0
+        when 1..4 then 3
+        when 4..16 then 6
+        when 16..36 then 8
+        when 36..64 then 9
+        when 64..100 then 12
+        else 15
+      end
+    return score
+  end
+
+  def getSizeCode
+    score = self.clacSizeScore()
+    code =
+      case score
+        when 0 then 's0'
+        when 3 then 's3'
+        when 6 then 's6'
+        when 8 then 's8'
+        when 9 then 's9'
+        when 12 then 's12'
+        else 'S15'
+      end
+    return code
+  end
+
+  def calcInflammationScore
+    inflammation = self.inflammation
+    inflammationCode = self.extractCode(inflammation)
+    score = 
+      case inflammationCode
+        when 'i0' then 0
+        when 'i1' then 1
+        when 'I3' then 3
+        when 'I9' then 9
+        else 0
+      end
+    return score
+  end
+
+  def calcGranuleTissueScore
+    granule_tissue = self.granule_tissue
+    granule_tissueCode = self.extractCode(granule_tissue)
+    score = 
+      case granule_tissueCode
+        when 'g0' then 0
+        when 'g1' then 1
+        when 'g3' then 3
+        when 'G4' then 4
+        when 'G5' then 5
+        when 'G6' then 6
+        else 0
+      end
+    return score
+  end
+
+  def calcNecroticTissueScore
+    necrotic_tissue = self.necrotic_tissue
+    necrotic_tissueCode = self.extractCode(necrotic_tissue)
+    score = 
+      case necrotic_tissueCode
+        when 'n0' then 0
+        when 'N3' then 3
+        when 'N6' then 6
+        else 0
+      end
+    return score
+  end
+
+  def clacPocketScore
+    minor_axis = self.pocket_minor_axis
+    major_axis = self.pocket_major_axis
+    size = major_axis * minor_axis
+    score = 
+      case size
+        when 0 then 0
+        when 1..4 then 6
+        when 4..16 then 9
+        when 16..36 then 12
+        else 24
+      end
+    return score
+  end
+
+  def getPocketCode
+    score = self.clacSizeScore()
+    code =
+      case score
+        when 0 then 'p0'
+        when 6 then 'P6'
+        when 9 then 'P9'
+        when 12 then 'P12'
+        else 'P24'
+      end
+    return code
+  end
+
+  def calcDesignRScore
+    return self.calcExudateScore() + self.clacSizeScore() + self.calcInflammationScore() + self.calcGranuleTissueScore() + self.calcNecroticTissueScore() + self.clacPocketScore()
+  end
+
+  def getDesignRCode
+    return self.extractCode(self.depth) + "-" + self.extractCode(self.exudate) + self.getSizeCode() + self.extractCode(self.inflammation) + 
+      self.extractCode(self.granule_tissue) + self.extractCode(self.necrotic_tissue) + "-" + self.getPocketCode() 
   end
 
 end
