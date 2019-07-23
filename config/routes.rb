@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
   # 療養者
   resources :patients
+  get 'patients/:id/image_form' => 'patients#image_form'
+  post 'patients/:id/upload_image' => 'patients#upload_image'
   # 看護師
   resources :nurses
   # 除圧用具

@@ -3,15 +3,19 @@ class DesignRsController < ApplicationController
   before_action :login_check
   
   def index
+    @designRs = DesignR.all()
   end
 
   def show
+    @designR = DesignR.find(params[:id])
   end
 
   def new
+    @designR = DesignR.new()
   end
 
   def edit
+    @designR = DesignR.find(params[:id])
   end
 
   def update

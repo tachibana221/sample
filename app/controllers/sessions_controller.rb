@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
       log_in(@nurse)
       # ブラウザを閉じてもログイン情報が保持されるようにする
       remember(@nurse)
+      flash[:primary] = 'ログインしました'
       redirect_to('/')
     else
       # エラー文を表示させる
@@ -26,6 +27,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
+    flash[:danger] = 'ログアウトしました'
     redirect_to('/')
   end
 end

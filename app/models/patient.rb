@@ -18,7 +18,6 @@ class Patient < ApplicationRecord
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
-    puts params
     today = Time.now
     self.name = params[:name]
     self.name_kana = params[:name_kana]
@@ -33,16 +32,16 @@ class Patient < ApplicationRecord
 
     # 画像が投稿された場合は書き換える
     if params[:image]
-      self.image = params[:image]
+      self.image = base64_conversion(params[:image], "patient_image_" + today.strftime('%Y%m%d%H%M%S'))
       self.image_editor = nurse
-      self.image_updated_at = DateTime.new(
-        params["image_updated_at(1i)"].to_i,
-        params["image_updated_at(2i)"].to_i,
-        params["image_updated_at(3i)"].to_i,
-        params["image_updated_at(4i)"].to_i,
-        params["image_updated_at(5i)"].to_i
-      )
     end
-
+    
+    self.image_updated_at = DateTime.new(
+      params["image_updated_at(1i)"].to_i,
+      params["image_updated_at(2i)"].to_i,
+      params["image_updated_at(3i)"].to_i,
+      params["image_updated_at(4i)"].to_i,
+      params["image_updated_at(5i)"].to_i
+    )
   end
 end
