@@ -46,7 +46,7 @@ class BedsoresController < ApplicationController
     @bedsore.updateComments(params[:bedsore][:comments]) if params[:bedsore][:comments]
     if @bedsore.save()
       flash[:primary] = '褥瘡情報を更新しました'
-      redirect_back(fallback_location: root_path)
+      redirect_to("/bedsores/#{params[:id]}")
     end
   end
 
