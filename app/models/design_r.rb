@@ -58,11 +58,14 @@ class DesignR < ApplicationRecord
     self.pocket_major_axis = params[:pocket_major_axis]
   end
 
+  # 以下DesingRのスコアを求めるロジック
+
   # 「【d0】:皮膚損傷・発赤なし」みたいな文字列から「d0」みたいなコードを取り出す
   def extractCode(str)
     return str[/【(.*?)】/, 1]
   end
 
+  # 深さのスコア算出
   def calcDepthScore()
     depth = self.depth
     depthCode = self.extractCode(depth)
@@ -80,6 +83,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # 滲出液のスコア算出
   def calcExudateScore()
     exudate = self.exudate
     exudateCode = self.extractCode(exudate)
@@ -94,6 +98,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # 大きさのスコアを算出
   def clacSizeScore
     minor_axis = self.size_minor_axis
     major_axis = self.size_major_axis
@@ -111,6 +116,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # 大きさのスコアから対応するコードを取得
   def getSizeCode
     score = self.clacSizeScore()
     code =
@@ -126,6 +132,7 @@ class DesignR < ApplicationRecord
     return code
   end
 
+  # 炎症/感染のスコア算出
   def calcInflammationScore
     inflammation = self.inflammation
     inflammationCode = self.extractCode(inflammation)
@@ -140,6 +147,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # 肉芽組織のスコア算出
   def calcGranuleTissueScore
     granule_tissue = self.granule_tissue
     granule_tissueCode = self.extractCode(granule_tissue)
@@ -156,6 +164,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # 壊死組織のスコア算出
   def calcNecroticTissueScore
     necrotic_tissue = self.necrotic_tissue
     necrotic_tissueCode = self.extractCode(necrotic_tissue)
@@ -169,10 +178,11 @@ class DesignR < ApplicationRecord
     return score
   end
 
-  def clacPocketScore
+  # ポケットのスコアを算出
+  def calcPocketScore
     minor_axis = self.pocket_minor_axis
     major_axis = self.pocket_major_axis
-    size = major_axis * minor_axis
+    size = major_axis * minor_axis - self.clacSizeScore
     score = 
       case size
         when 0 then 0
@@ -184,6 +194,7 @@ class DesignR < ApplicationRecord
     return score
   end
 
+  # ポケットのスコアから対応するコードを取得
   def getPocketCode
     score = self.clacSizeScore()
     code =
@@ -197,10 +208,14 @@ class DesignR < ApplicationRecord
     return code
   end
 
+  # 合計スコアを算出
+  # 深さのスコアは使用しない
   def calcDesignRScore
-    return self.calcExudateScore() + self.clacSizeScore() + self.calcInflammationScore() + self.calcGranuleTissueScore() + self.calcNecroticTissueScore() + self.clacPocketScore()
+    return self.calcExudateScore() + self.clacSizeScore() + self.calcInflammationScore() + 
+      self.calcGranuleTissueScore() + self.calcNecroticTissueScore() + self.calcPocketScore()
   end
 
+  # 合計コードを取得
   def getDesignRCode
     return self.extractCode(self.depth) + "-" + self.extractCode(self.exudate) + self.getSizeCode() + self.extractCode(self.inflammation) + 
       self.extractCode(self.granule_tissue) + self.extractCode(self.necrotic_tissue) + "-" + self.getPocketCode() 
