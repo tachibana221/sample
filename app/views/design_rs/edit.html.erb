@@ -1,52 +1,77 @@
+<%= javascript_include_tag "konva.min" %>
+<%= javascript_include_tag "measureDesignRSize" %>
+
 <h3>Design-R情報</h3>
+<%= link_to("褥瘡情報へ戻る", "/bedsores/#{@designR.bedsore.id}", class:"btn btn-link") %>
+
 <div class="container">
   <%= form_with model: @designR, local: true do |form| %>
     <div class="form-group">
-      <%= form.label :"深さ"%>
+      <%= form.label :"深さ", :class => "h5"%>
       <%= form.select :depth, DesignR.depths.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
-      <%= form.label :"滲出液"%>
+      <%= form.label :"滲出液", :class=>"h5"%>
       <%= form.select :exudate, DesignR.exudates.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
-      <%= form.label :"大きさ"%>
+      <%= form.label :"大きさ", :class=>"h5"%>
       <div class="form-row container">
         <div class="form-group col">
-          <%= form.label :"短径(cm)"%>
-          <%= form.number_field :size_minor_axis, class: "form-control", id: "size_minor_axis"  %>
+          <%= form.label :"短径(cm)", :class=>"h6"%>
+          <%= form.number_field :size_minor_axis, step: :any, class: "form-control", id: "size_minor_axis"  %>
         </div>
         <div class="form-group col">
-          <%= form.label :"長径(cm)"%>
-          <%= form.number_field :size_major_axis, class: "form-control", id: "size_major_axis"  %>
+          <%= form.label :"長径(cm)", :class=>"h6"%>
+          <%= form.number_field :size_major_axis, step: :any, class: "form-control", id: "size_major_axis"  %>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <%= form.label :"炎症/感染"%>
+      <%= form.label :"炎症/感染", :class=>"h5"%>
       <%= form.select :inflammation, DesignR.inflammations.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
-      <%= form.label :"肉芽組織"%>
+      <%= form.label :"肉芽組織", :class=>"h5"%>
       <%= form.select :granule_tissue, DesignR.granule_tissues.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
-      <%= form.label :"壊死組織"%>
+      <%= form.label :"壊死組織", :class=>"h5"%>
       <%= form.select :necrotic_tissue, DesignR.necrotic_tissues.keys.to_a, {}, { class: "custom-select" } %>
     </div>
     <div class="form-group">
-      <%= form.label :"ポケット"%>
+      <%= form.label :"ポケット", :class=>"h5"%>
       <div class="form-row container">
         <div class="form-group col-md-6">
-              <%= form.label :"短径(cm)"%>
-          <%= form.number_field :pocket_minor_axis, class: "form-control", id: "size_minor_axis"  %>
+              <%= form.label :"短径(cm)", :class=>"h6"%>
+          <%= form.number_field :pocket_minor_axis, step: :any, class: "form-control", id: "pocket_minor_axis"  %>
         </div>
         <div class="form-group col-md-6">
-          <%= form.label :"長径(cm)"%>
-          <%= form.number_field :pocket_major_axis, class: "form-control", id: "size_major_axis"  %>
+          <%= form.label :"長径(cm)", :class=>"h6"%>
+          <%= form.number_field :pocket_major_axis, step: :any, class: "form-control", id: "pocket_major_axis"  %>
         </div>
       </div>
     </div>
-    <%= form.submit "登録", class: "btn btn-primary" %>
+    <%= form.submit "保存", class: "btn btn-primary" %>
   <% end %>
+  <h3>自動測定</h3>
+  <div class="container" style="width:80%;">
+    <div id="message-box" style="height:100px">
+      <span id="guide-message"></span>
+      <p id="guide-message-under">測定ボタンを押してください</p>
+      <div id="button-box">
+        <button class="btn btn-primary start-measure" id="start-size-measure">大きさを測定</button>
+        <button class="btn btn-primary start-measure" id="start-pocket-measure">ポケットを測定</button>
+        <button class="btn btn-primary end-button" style="display: none" id="end-measure">測定終了</button>
+        <button class="btn btn-warning end-button" style="display: none" id="re-measure">再測定</button>
+      </div>
+    </div>
+    <div id="canvas_area"></div>
+    <div id="image_data"
+      data-image-url="<%= @designR.bedsore.image.url %>"
+      data-handwrite-image-url="<%= @designR.bedsore.handwrite_image.url %>"
+      data-comments="<%= @designR.bedsore.comments.as_json().to_json() %>"
+      data-bedsore-id="<%= @designR.bedsore.id %>"
+    ></div>
+  </div>
 </div>
