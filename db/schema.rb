@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_062738) do
+ActiveRecord::Schema.define(version: 2019_07_24_004522) do
 
   create_table "bedsore_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "part_genre"
@@ -81,15 +81,15 @@ ActiveRecord::Schema.define(version: 2019_07_17_062738) do
   end
 
   create_table "design_rs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "depth"
-    t.integer "exudate"
-    t.decimal "size_minor_axis", precision: 10
-    t.decimal "size_major_axis", precision: 10
-    t.integer "inflammation"
-    t.integer "granule_tissue"
-    t.integer "necrotic_tissue"
-    t.decimal "pocket_minor_axis", precision: 10
-    t.decimal "pocket_major_axis", precision: 10
+    t.integer "depth", default: 0
+    t.integer "exudate", default: 0
+    t.decimal "size_minor_axis", precision: 10, default: "0"
+    t.decimal "size_major_axis", precision: 10, default: "0"
+    t.integer "inflammation", default: 0
+    t.integer "granule_tissue", default: 0
+    t.integer "necrotic_tissue", default: 0
+    t.decimal "pocket_minor_axis", precision: 10, default: "0"
+    t.decimal "pocket_major_axis", precision: 10, default: "0"
     t.bigint "bedsore_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,9 +6,9 @@
 <p>撮影者:<%= @bedsore.image_editor.name %> <%= @bedsore.image_edited_at.strftime("%Y年%m月%d日 %H時%M分") if !@bedsore.image_edited_at.nil? %></p>
 <p>褥瘡評価:</p>
 <h3>Design-R情報</h3>
-<%= link_to("編集/入力", "/design_rs/#{@bedsore.design_r.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
-<p>褥瘡評価 :<%= @bedsore.design_r.getDesignRCode() %> = <%= @bedsore.design_r.calcDesignRScore %></p>
 <div class="container">
+  <p>褥瘡評価 :<span class="h4"><%= @bedsore.design_r.getDesignRCode() %> = <%= @bedsore.design_r.calcDesignRScore %></span></p>
+  <%= link_to("編集/入力", "/design_rs/#{@bedsore.design_r.id}/edit", :class => "btn btn-primary mt-1 mb-2") %>
   <p>深さ:<span class="h4"><%= @bedsore.design_r.depth %></span></p>
   <p>滲出液:<span class="h4"><%= @bedsore.design_r.exudate %></span></p>
   <p>大きさ: 短径 <span class="h4"><%= @bedsore.design_r.size_minor_axis %></span>cm x 長径 <span class="h4"><%= @bedsore.design_r.size_major_axis %></span>cm</p>
