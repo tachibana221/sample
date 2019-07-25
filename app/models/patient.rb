@@ -20,7 +20,7 @@ class Patient < ApplicationRecord
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
-    today = Time.zone.now
+    today = Time.now
     self.name = params[:name]
     self.name_kana = params[:name_kana]
     self.age = params[:age]
@@ -38,7 +38,7 @@ class Patient < ApplicationRecord
       self.image_editor = nurse
     end
 
-    self.image_updated_at = DateTime.zone.new(
+    self.image_updated_at = DateTime.new(
       params['image_updated_at(1i)'].to_i,
       params['image_updated_at(2i)'].to_i,
       params['image_updated_at(3i)'].to_i,

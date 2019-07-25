@@ -23,7 +23,7 @@ class Bedsore < ApplicationRecord
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
-    today = Time.zone.now
+    today = Time.now
 
     if params[:comment]
       self.comment = params[:comment]

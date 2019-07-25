@@ -55,23 +55,21 @@
     <%= form.submit "保存", class: "btn btn-primary" %>
   <% end %>
   <h3>自動測定</h3>
-  <div class="container" style="width:80%;">
-    <div id="message-box" style="height:100px">
-      <span id="guide-message"></span>
-      <p id="guide-message-under">測定ボタンを押してください</p>
-      <div id="button-box">
-        <button class="btn btn-primary start-measure" id="start-size-measure">大きさを測定</button>
-        <button class="btn btn-primary start-measure" id="start-pocket-measure">ポケットを測定</button>
-        <button class="btn btn-primary end-button" style="display: none" id="end-measure">測定終了</button>
-        <button class="btn btn-warning end-button" style="display: none" id="re-measure">再測定</button>
-      </div>
+  <div id="message-box" style="height:100px">
+    <span id="guide-message"></span>
+    <p id="guide-message-under">測定ボタンを押してください</p>
+    <div id="button-box">
+      <button class="btn btn-primary start-measure" id="start-size-measure">大きさを測定</button>
+      <button class="btn btn-primary start-measure" id="start-pocket-measure">ポケットを測定</button>
+      <button class="btn btn-primary end-button" style="display: none" id="end-measure">測定終了</button>
+      <button class="btn btn-warning end-button" style="display: none" id="re-measure">再測定</button>
     </div>
-    <div id="canvas_area"></div>
-    <div id="image_data"
-      data-image-url="<%= @designR.bedsore.image.url %>"
-      data-handwrite-image-url="<%= @designR.bedsore.handwrite_image.url %>"
-      data-comments="<%= @designR.bedsore.comments.as_json().to_json() %>"
-      data-bedsore-id="<%= @designR.bedsore.id %>"
-    ></div>
   </div>
+  <div id="canvas_area"></div>
+  <div id="image_data"
+    data-image-url="<%= @designR.bedsore.image.url %>"
+    data-handwrite-image-url="<%= @designR.bedsore.handwrite_image.url %>"
+    data-comments="<%= @designR.bedsore.comments.as_json().to_json() %>"
+    data-bedsore-id="<%= @designR.bedsore.id %>"
+  ></div>
 </div>
