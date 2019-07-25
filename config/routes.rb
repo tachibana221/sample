@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   resources :design_rs
   # コメント
   resources :comments
+  # 使用ケア物品
+  resources :using_care_tools
+  # 使用除圧用具
+  resources :using_depressure_tools
   
   # ログイン・ログアウト用
   get    'login'   => 'sessions#index'

@@ -1,0 +1,48 @@
+<h1>使用ケア物品一覧</h1>
+<%= link_to("#{@using_depressure_tool.patient.name}さんの個人ページへ", "/patients/#{@using_depressure_tool.patient.id}") %>
+<div class="mt-1 mb-2">
+  <%= link_to("編集", "/using_depressure_tools/#{@using_depressure_tool.id}/edit", class:"btn btn-primary") %>
+</div>
+<h4>画像</h4>
+<div class="container">
+  <div style="width: 24rem;">
+    <%= image_tag(@using_depressure_tool.image.url, :class => "img-thumbnail") if @using_depressure_tool.image?%>
+  </div>
+</div>
+<h3>コメント</h3>
+  <div class="container" >
+    <p style="min-height:70px" class="bg-light border h5"> <%= @using_depressure_tool.comment %> </p>
+  </div>
+
+<h3>ベッド</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_depressure_tool.depressure_tools.select{|tool| tool.genre == "ベッド" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>車椅子</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_depressure_tool.depressure_tools.select{|tool| tool.genre == "車椅子" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>その他</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_depressure_tool.depressure_tools.select{|tool| tool.genre == "その他" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>

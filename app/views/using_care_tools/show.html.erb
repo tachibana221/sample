@@ -1,0 +1,58 @@
+<h1>使用ケア物品一覧</h1>
+<%= link_to("#{@using_care_tool.patient.name}さんの個人ページへ", "/patients/#{@using_care_tool.patient.id}") %>
+<div class="mt-1 mb-2">
+  <%= link_to("編集", "/using_care_tools/#{@using_care_tool.id}/edit", class:"btn btn-primary") %>
+</div>
+<h4>画像</h4>
+<div class="container">
+  <div style="width: 24rem;">
+    <%= image_tag(@using_care_tool.image.url, :class => "img-thumbnail") if @using_care_tool.image?%>
+  </div>
+</div>
+<h3>コメント</h3>
+  <div class="container" >
+    <p style="min-height:70px" class="bg-light border h5"> <%= @using_care_tool.comment %> </p>
+  </div>
+<h3>軟膏類</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_care_tool.care_tools.select{|tool| tool.genre == "軟膏類" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>洗浄用品</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_care_tool.care_tools.select{|tool| tool.genre == "洗浄用品" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>被覆材・テープ類</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_care_tool.care_tools.select{|tool| tool.genre == "被覆材・テープ類" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>衛生材料</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @using_care_tool.care_tools.select{|tool| tool.genre == "衛生材料" }.each do |tool| %>
+      <div class="list-group-item">
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
