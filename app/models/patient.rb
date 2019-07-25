@@ -5,6 +5,7 @@ class Patient < ApplicationRecord
 
   has_many :bedsore_parts, dependent: :destroy
   has_one :using_care_tool, dependent: :destroy, class_name: "UsingCareTool"
+  has_one :using_depressure_tool, dependent: :destroy, class_name: "UsingDepressureTool"
 
   # 画像投稿用
   # carrierwaveのおまじない

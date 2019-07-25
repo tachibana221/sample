@@ -1,5 +1,8 @@
 # 除圧用具モデル
 class DepressureTool < ApplicationRecord
+  has_many :assign_depressure_tools, dependent: :destroy
+  has_many :using_depressure_tools, through: :assign_depressure_tools
+
   # 名前は入力必須
   validates :name,  presence: true
   # 除圧用具の種類のenum

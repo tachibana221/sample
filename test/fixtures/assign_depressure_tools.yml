@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  using_depressure_tool: one
+  depressure_tool: one
+
+two:
+  using_depressure_tool: two
+  depressure_tool: two

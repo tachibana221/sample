@@ -35,7 +35,8 @@ class PatientsController < ApplicationController
     # フォームの値取り出し
     @patient.update(params[:patient], current_nurse)
     using_care_tool = @patient.build_using_care_tool
-    if @patient.save() && using_care_tool.save()
+    using_depressure_tool = @patient.build_using_depressure_tool
+    if @patient.save() && using_care_tool.save() && using_depressure_tool.save()
       flash[:primary] = '新しく療養者を登録しました'
       redirect_to('/patients')
     else
