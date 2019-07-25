@@ -11,18 +11,7 @@
   <%# 編集フォーム %>
   <%= form_with model: @comment, local: true do |form| %>
     <%= form.hidden_field :bedsore_id, :value => @bedsore.id %>
-    <div class="form-group">
-      <%= form.label :"テキスト", class:"active"%>
-      <%= form.text_area :text, class: "form-control", id: "name" %>
-    </div>
-    <div class="form-group">
-      <%= form.label :"x座標"%>
-      <%= form.number_field :position_x, class: "form-control"  %>
-    </div>
-    <div class="form-group">
-      <%= form.label :"y座標"%>
-      <%= form.number_field :position_y, class: "form-control"  %>
-    </div>
+    <%= render :partial => 'form', :locals => {:form => form} %>
     <%= form.submit :"登録", class:"btn btn-primary" %>
   <% end %>
 </div>
