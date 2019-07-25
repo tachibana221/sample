@@ -10,15 +10,13 @@ class UsingCareTool < ApplicationRecord
   def update(params)
     self.comment = params[:comment]
     # 画像が投稿された場合は書き換える
-    if params[:image]
-      self.image = params[:image]
-    end
+    self.image = params[:image] if params[:image]
 
     # 一旦すでに登録されている使用物品を全部消してから新しく全部登録し直す
     # すでに登録されているものがもう一度登録されて重複したり、消したやつが消えなかったりするため
     # 多分一個一個登録されているレコードとparams[:tool_ids]のidを比較していって消すとか追加するとかするようにしたほうがいいと思う
     # 今のままだと保存されるたびに中間テーブルが作り直されていく
-    self.care_tools.clear()
-    self.care_tools << CareTool.find(params[:tool_ids])
+    care_tools.clear()
+    care_tools << CareTool.find(params[:tool_ids])
   end
-end 
+end

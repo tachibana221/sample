@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check
-  
+
   def index
     @comments = Comment.all()
   end
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 
   def edit
     comment_id = params[:id]
-    @comment = Comment.find(comment_id)  
+    @comment = Comment.find(comment_id)
   end
 
   def create
@@ -46,10 +46,6 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.destroy()
-      redirect_back(fallback_location: root_path)
-    end
+    redirect_back(fallback_location: root_path) if @comment.destroy()
   end
-  
-
 end

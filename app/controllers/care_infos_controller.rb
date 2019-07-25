@@ -1,7 +1,7 @@
 class CareInfosController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check
-  
+
   def index
     bedsore_part_id = params[:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)
@@ -9,17 +9,17 @@ class CareInfosController < ApplicationController
 
   def show
     care_info_id = params[:id]
-    @care_info = CareInfo.find(care_info_id) 
+    @care_info = CareInfo.find(care_info_id)
   end
 
   def new
     bedsore_part_id = params[:bedsore_part_id]
-    @bedsore_part = BedsorePart.find(bedsore_part_id)  
+    @bedsore_part = BedsorePart.find(bedsore_part_id)
   end
 
   def edit
     care_info_id = params[:id]
-    @care_info = CareInfo.find(care_info_id)  
+    @care_info = CareInfo.find(care_info_id)
   end
 
   def create
@@ -29,7 +29,7 @@ class CareInfosController < ApplicationController
     care_info.update(params, current_nurse)
     if care_info.save()
       flash[:primary] = '新しくケア情報を登録しました'
-      redirect_to :action => "index", :bedsore_part_id => bedsore_part_id
+      redirect_to action: 'index', bedsore_part_id: bedsore_part_id
     end
   end
 
@@ -38,14 +38,12 @@ class CareInfosController < ApplicationController
     @care_info.update(params[:care_info], current_nurse)
     if @care_info.save()
       flash[:primary] = 'ケア情報を更新しました'
-      redirect_to :action => "index", :bedsore_part_id => @care_info.bedsore_part.id
+      redirect_to action: 'index', bedsore_part_id: @care_info.bedsore_part.id
     end
   end
 
   def destroy
     @careinfo = CareInfo.find(params[:id])
-    if @careinfo.destroy()
-      redirect_back(fallback_location: root_path)
-    end
+    redirect_back(fallback_location: root_path) if @careinfo.destroy()
   end
 end

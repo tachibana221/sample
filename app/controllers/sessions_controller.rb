@@ -1,6 +1,5 @@
 # ログイン情報コントローラー
 class SessionsController < ApplicationController
-
   def index
     @nurses = Nurse.all()
   end
@@ -12,7 +11,7 @@ class SessionsController < ApplicationController
   def create
     @nurse = Nurse.find_by(id: params[:id])
     # レコードが存在して、入力されたパスワードが正しいならログインさせる
-    if @nurse && @nurse.authenticate(params[:password])
+    if @nurse&.authenticate(params[:password])
       log_in(@nurse)
       # ブラウザを閉じてもログイン情報が保持されるようにする
       remember(@nurse)
@@ -20,7 +19,7 @@ class SessionsController < ApplicationController
       redirect_to('/')
     else
       # エラー文を表示させる
-      flash.now[:danger] = "パスワードが正しくありません"
+      flash.now[:danger] = 'パスワードが正しくありません'
       render 'new'
     end
   end

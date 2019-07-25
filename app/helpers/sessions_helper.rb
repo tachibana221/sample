@@ -10,7 +10,7 @@ module SessionsHelper
       @current_nurse ||= Nurse.find_by(id: nurse_id)
     elsif (nurse_id = cookies.signed[:nurse_id])
       nurse = Nurse.find_by(id: nurse_id)
-      if nurse && nurse.authenticated?(cookies[:remember_token])
+      if nurse&.authenticated?(cookies[:remember_token])
         log_in(nurse)
         @current_nurse = nurse
       end
@@ -46,9 +46,8 @@ module SessionsHelper
   # ログインしているかチェック
   def login_check
     unless logged_in?
-      flash[:danger] = "この操作を行うにはログインする必要があります"
-      redirect_to("/login")
+      flash[:danger] = 'この操作を行うにはログインする必要があります'
+      redirect_to('/login')
     end
   end
-  
 end

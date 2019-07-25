@@ -53,7 +53,7 @@ class PatientsController < ApplicationController
       flash[:primary] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")
     else
-      render("patients/edit")
+      render('patients/edit')
     end
   end
 
@@ -65,7 +65,7 @@ class PatientsController < ApplicationController
       flash[:primary] = '登録情報を更新しました'
       redirect_to("/patients/#{params[:id]}")
     else
-      render("patients/edit")
+      render('patients/edit')
     end
   end
 

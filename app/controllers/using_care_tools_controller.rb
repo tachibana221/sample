@@ -1,6 +1,5 @@
 class UsingCareToolsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def show
     @using_care_tool = UsingCareTool.find(params[:id])
@@ -20,7 +19,7 @@ class UsingCareToolsController < ApplicationController
       redirect_to("/using_care_tools/#{params[:id]}")
     else
       @care_tools = CareTool.all()
-      render("using_care_tools/edit")
+      render('using_care_tools/edit')
     end
   end
 end

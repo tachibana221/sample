@@ -1,6 +1,5 @@
 class UsingDepressureToolsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def show
     @using_depressure_tool = UsingDepressureTool.find(params[:id])
@@ -20,7 +19,7 @@ class UsingDepressureToolsController < ApplicationController
       redirect_to("/using_depressure_tools/#{params[:id]}")
     else
       @depressure_tools = CareTool.all()
-      render("using_depressure_tools/edit")
+      render('using_depressure_tools/edit')
     end
   end
 end

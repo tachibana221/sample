@@ -3,18 +3,18 @@ class Nurse < ApplicationRecord
   attr_accessor :remember_token
 
   # ほかモデルへの関連付け
-  has_many :edited_topics_patients, class_name: "Patient", foreign_key: 'topics_editor_id', dependent: :nullify
-  has_many :edited_image_patients, class_name: "Patient", foreign_key: 'image_editor_id', dependent: :nullify
-  has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'comment_editor_id', dependent: :nullify
-  has_many :edited_image_care_info, class_name: "CareInfo", foreign_key: 'image_editor_id', dependent: :nullify
-  has_many :edited_image_bedsore, class_name: "Bedsore", foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_topics_patients, class_name: 'Patient', foreign_key: 'topics_editor_id', dependent: :nullify
+  has_many :edited_image_patients, class_name: 'Patient', foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_image_care_info, class_name: 'CareInfo', foreign_key: 'comment_editor_id', dependent: :nullify
+  has_many :edited_image_care_info, class_name: 'CareInfo', foreign_key: 'image_editor_id', dependent: :nullify
+  has_many :edited_image_bedsore, class_name: 'Bedsore', foreign_key: 'image_editor_id', dependent: :nullify
   has_many :care_infos, dependent: :nullify
   has_many :bedsore_parts, dependent: :nullify
   has_many :bedsores, dependent: :nullify
 
   # カラムのバリデート
   # 名前とパスワードは入力必須
-  validates :name,  presence: true
+  validates :name, presence: true
   validates :password, presence: true, allow_nil: true
   # bcryptを使うためのおまじない
   has_secure_password
@@ -31,14 +31,14 @@ class Nurse < ApplicationRecord
   end
 
   # 渡された文字列のハッシュ値を返す
-  def Nurse.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   # ランダムなトークンを返す
-  def Nurse.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -51,6 +51,7 @@ class Nurse < ApplicationRecord
   # トークンが有効か（ログイン済みかどうか）
   def authenticated?(remember_token)
     return false if remember_digest.nil?
+
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
@@ -58,5 +59,4 @@ class Nurse < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-
 end

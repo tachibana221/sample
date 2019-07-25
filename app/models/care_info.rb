@@ -1,7 +1,7 @@
 class CareInfo < ApplicationRecord
   belongs_to :bedsore_part
-  belongs_to :image_editor, class_name: "Nurse", foreign_key: 'image_editor_id', optional: true
-  belongs_to :comment_editor, class_name: "Nurse", foreign_key: 'comment_editor_id', optional: true
+  belongs_to :image_editor, class_name: 'Nurse', foreign_key: 'image_editor_id', optional: true
+  belongs_to :comment_editor, class_name: 'Nurse', foreign_key: 'comment_editor_id', optional: true
   belongs_to :nurse, optional: true
 
   # 画像投稿用
@@ -10,9 +10,9 @@ class CareInfo < ApplicationRecord
 
   # コントローラーから渡されたparamでカラムを更新する
   def update(params, nurse)
-    today = Time.now
+    today = Time.zone.now
     # コメントが入力されてかつ、値が変更されていた場合は書き換える
-    if params[:comment] != "" && params[:comment] != self.comment
+    if params[:comment] != '' && params[:comment] != comment
       self.comment = params[:comment]
       self.comment_editor = nurse
       self.comment_edited_at = today

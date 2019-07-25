@@ -1,18 +1,14 @@
 class BedsorePartsController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check
-  
-  def index
-  end
 
-  def show
-  end
+  def index; end
 
-  def new
-  end
+  def show; end
 
-  def edit
-  end
+  def new; end
+
+  def edit; end
 
   def create
     @patient = Patient.find(params[:patient_id])
@@ -24,14 +20,10 @@ class BedsorePartsController < ApplicationController
     end
   end
 
-  def update
-  end
+  def update; end
 
   def destroy
     @bedsore_part = BedsorePart.find(params[:id])
-    if @bedsore_part.destroy()
-      redirect_back(fallback_location: root_path)
-    end
+    redirect_back(fallback_location: root_path) if @bedsore_part.destroy()
   end
-
 end
