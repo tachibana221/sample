@@ -1,12 +1,48 @@
-<h3>除圧用具一覧</h3>
+<h1>除圧用具一覧</h1>
 <div class="mt-1 mb-2">
   <%= link_to("除圧用具登録", "/depressure_tools/new", class: "btn btn-primary") %>
 </div>
-<div class="list-group">
-  <% @tools.each do |tool| %>
-    <div class="list-group-item d-flex justify-content-between align-items-center">
-      <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
-      <%= link_to("削除", "/depressure_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
-    </div>
-  <% end %>
+<h3>ベッド</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @tools.select{|tool| tool.genre == "ベッド" }.each do |tool| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+        <div class="">
+          <%= link_to("編集", "/depressure_tools/#{tool.id}/edit", class:"btn btn-primary btn-sm") %>
+          <%= link_to("削除", "/depressure_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>車椅子</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @tools.select{|tool| tool.genre == "車椅子" }.each do |tool| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+        <div class="">
+          <%= link_to("編集", "/depressure_tools/#{tool.id}/edit", class:"btn btn-primary btn-sm") %>
+          <%= link_to("削除", "/depressure_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3>その他</h3>
+<div class="container" style="min-height:30px">
+  <div class="list-group">
+    <% @tools.select{|tool| tool.genre == "その他" }.each do |tool| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to(tool.name, "/depressure_tools/#{tool.id}") %>
+        <div class="">
+          <%= link_to("編集", "/depressure_tools/#{tool.id}/edit", class:"btn btn-primary btn-sm") %>
+          <%= link_to("削除", "/depressure_tools/#{tool.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
