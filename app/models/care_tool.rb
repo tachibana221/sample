@@ -1,5 +1,8 @@
 # ケア物品モデル
 class CareTool < ApplicationRecord
+  has_many :assign_care_tools, dependent: :destroy
+  has_many :using_care_tools, through: :assign_care_tools
+
   # 名前は入力必須
   validates :name,  presence: true
   # ケア物品の種類のenum

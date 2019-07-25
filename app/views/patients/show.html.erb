@@ -67,4 +67,9 @@
     <% end %>
   </div>
 </div>
+<h3>使用物品</h3>
+<div class="container">
+  <h5><%= link_to("ケア物品一覧", "/using_care_tools/#{@patient.using_care_tool.id}", class: "btn btn-info") %></h5>
+  <h5>使用ケア物品一覧</h5>
+</div>
 

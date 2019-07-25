@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_004522) do
+ActiveRecord::Schema.define(version: 2019_07_25_012707) do
+
+  create_table "assign_care_tools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "using_care_tool_id"
+    t.bigint "care_tool_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["care_tool_id"], name: "index_assign_care_tools_on_care_tool_id"
+    t.index ["using_care_tool_id"], name: "index_assign_care_tools_on_using_care_tool_id"
+  end
 
   create_table "bedsore_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "part_genre"
@@ -122,6 +131,17 @@ ActiveRecord::Schema.define(version: 2019_07_24_004522) do
     t.index ["topics_editor_id"], name: "index_patients_on_topics_editor_id"
   end
 
+  create_table "using_care_tools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "comment"
+    t.string "image"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_using_care_tools_on_patient_id"
+  end
+
+  add_foreign_key "assign_care_tools", "care_tools"
+  add_foreign_key "assign_care_tools", "using_care_tools"
   add_foreign_key "bedsore_parts", "nurses"
   add_foreign_key "bedsore_parts", "patients"
   add_foreign_key "bedsores", "bedsore_parts"
@@ -135,4 +155,5 @@ ActiveRecord::Schema.define(version: 2019_07_24_004522) do
   add_foreign_key "design_rs", "bedsores"
   add_foreign_key "patients", "nurses", column: "image_editor_id"
   add_foreign_key "patients", "nurses", column: "topics_editor_id"
+  add_foreign_key "using_care_tools", "patients"
 end

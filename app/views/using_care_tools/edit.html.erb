@@ -1,0 +1,51 @@
+<h1>使用ケア物品一覧</h1>
+<%= form_with model: @using_care_tool, local: true do |form| %>
+  <div class="form-group custom-file">
+    <%= form.file_field :image %>
+  </div>
+  <div class="form-group">
+    <%= form.label :"コメント"%>
+    <%= form.text_area :comment, class: "form-control", id: "topics" %>
+  </div>
+  <h3>軟膏類</h3>
+  <% @care_tools.select{|tool| tool.genre == "軟膏類" }.each do |tool| %>
+    <div class="container" style="min-height:30px">
+      <div class="list-group-item">
+        <% checked = tool.using_care_tools.exists?(@using_care_tool.id) ? true : false %> 
+        <%= form.check_box 'tool_ids', {:name => 'using_care_tool[tool_ids][]', :checked => checked }, tool.id, nil %>
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    </div>
+  <% end %>
+  <h3>洗浄用品</h3>
+  <% @care_tools.select{|tool| tool.genre == "洗浄用品" }.each do |tool| %>
+    <div class="container" style="min-height:30px">
+      <div class="list-group-item">
+        <% checked = tool.using_care_tools.exists?(@using_care_tool.id) ? true : false %> 
+        <%= form.check_box 'tool_ids', {:name => 'using_care_tool[tool_ids][]', :checked => checked }, tool.id, nil %>
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    </div>
+  <% end %>
+  <h3>被覆材・テープ類</h3>
+  <% @care_tools.select{|tool| tool.genre == "被覆材・テープ類" }.each do |tool| %>
+    <div class="container" style="min-height:30px">
+      <div class="list-group-item">
+        <% checked = tool.using_care_tools.exists?(@using_care_tool.id) ? true : false %> 
+        <%= form.check_box 'tool_ids', {:name => 'using_care_tool[tool_ids][]', :checked => checked }, tool.id, nil %>
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    </div>
+  <% end %>
+  <h3>衛生材料</h3>
+  <% @care_tools.select{|tool| tool.genre == "衛生材料" }.each do |tool| %>
+    <div class="container" style="min-height:30px">
+      <div class="list-group-item">
+        <% checked = tool.using_care_tools.exists?(@using_care_tool.id) ? true : false %> 
+        <%= form.check_box 'tool_ids', {:name => 'using_care_tool[tool_ids][]', :checked => checked }, tool.id, nil %>
+        <%= link_to(tool.name, "/care_tools/#{tool.id}") %>
+      </div>
+    </div>
+  <% end %>
+  <%= form.submit :"更新", class:"btn btn-primary" %>
+<% end %>
