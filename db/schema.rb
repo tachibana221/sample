@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_024236) do
+ActiveRecord::Schema.define(version: 2019_07_26_052342) do
 
   create_table "assign_care_tools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "using_care_tool_id"
@@ -101,13 +101,13 @@ ActiveRecord::Schema.define(version: 2019_07_25_024236) do
   create_table "design_rs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "depth", default: 0
     t.integer "exudate", default: 0
-    t.decimal "size_minor_axis", precision: 10, default: "0"
-    t.decimal "size_major_axis", precision: 10, default: "0"
+    t.decimal "size_minor_axis", precision: 6, scale: 1, default: "0.0"
+    t.decimal "size_major_axis", precision: 6, scale: 1, default: "0.0"
     t.integer "inflammation", default: 0
     t.integer "granule_tissue", default: 0
     t.integer "necrotic_tissue", default: 0
-    t.decimal "pocket_minor_axis", precision: 10, default: "0"
-    t.decimal "pocket_major_axis", precision: 10, default: "0"
+    t.decimal "pocket_minor_axis", precision: 6, scale: 1, default: "0.0"
+    t.decimal "pocket_major_axis", precision: 6, scale: 1, default: "0.0"
     t.bigint "bedsore_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
