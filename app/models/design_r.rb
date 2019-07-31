@@ -24,7 +24,7 @@ class DesignR < ApplicationRecord
   enum inflammation: {
     "【i0】:局所の炎症徴候": 0,
     "【i1】:局所の炎症徴候あり(創周囲の発赤、腫脹、熱感)": 1,
-    "【i3】:局所の明らかな感染徴候あり（炎症徴候、膿、悪臭など）": 2,
+    "【I3】:局所の明らかな感染徴候あり（炎症徴候、膿、悪臭など）": 2,
     "【I9】:全身的影響あり(発熱など)": 3
   }
 
@@ -41,7 +41,7 @@ class DesignR < ApplicationRecord
   # 壊死組織
   enum necrotic_tissue: {
     "【n0】:壊死組織なし": 0,
-    "【n3】:柔らかい壊死組織あり": 1,
+    "【N3】:柔らかい壊死組織あり": 1,
     "【N6】:硬く暑い密着した壊死組織あり": 2
   }
 
@@ -98,19 +98,24 @@ class DesignR < ApplicationRecord
     score
   end
 
-  # 大きさのスコアを算出
-  def clacSizeScore
+  # 大きさの面積を計算
+  def calcSizeArea
     minor_axis = size_minor_axis
     major_axis = size_major_axis
-    size = major_axis * minor_axis
+    return major_axis * minor_axis
+  end
+
+  # 大きさのスコアを算出
+  def clacSizeScore
+    size = calcSizeArea()
     score =
       case size
       when 0 then 0
-      when 1..4 then 3
-      when 4..16 then 6
-      when 16..36 then 8
-      when 36..64 then 9
-      when 64..100 then 12
+      when 1...4 then 3
+      when 4...16 then 6
+      when 16...36 then 8
+      when 36...64 then 9
+      when 64...100 then 12
       else 15
       end
     score
@@ -182,13 +187,14 @@ class DesignR < ApplicationRecord
   def calcPocketScore
     minor_axis = pocket_minor_axis
     major_axis = pocket_major_axis
-    size = major_axis * minor_axis - clacSizeScore
+    # 面積がマイナスにならないように
+    size = [major_axis * minor_axis - calcSizeArea(), 0].max
     score =
       case size
       when 0 then 0
-      when 1..4 then 6
-      when 4..16 then 9
-      when 16..36 then 12
+      when 1...4 then 6
+      when 4...16 then 9
+      when 16...36 then 12
       else 24
       end
     score
@@ -196,7 +202,7 @@ class DesignR < ApplicationRecord
 
   # ポケットのスコアから対応するコードを取得
   def getPocketCode
-    score = clacSizeScore()
+    score = calcPocketScore()
     code =
       case score
       when 0 then 'p0'
