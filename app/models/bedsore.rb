@@ -11,11 +11,14 @@ class Bedsore < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   has_one :design_r, dependent: :destroy, class_name: 'DesignR'
-
+  
   # 画像投稿用
   # carrierwaveのおまじない
   mount_uploader :image, ImageUploader
   mount_uploader :handwrite_image, ImageUploader
+  
+  #画像登録の必須化
+  validates_presence_of :image
 
   def comments_by_day
     comments.by_day_hash
@@ -56,4 +59,5 @@ class Bedsore < ApplicationRecord
       comment.save()
     end
   end
+
 end

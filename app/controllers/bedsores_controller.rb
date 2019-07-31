@@ -15,6 +15,7 @@ class BedsoresController < ApplicationController
   def new
     bedsore_part_id = params[:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)
+    @bedsore = Bedsore.new()
   end
 
   def edit
@@ -28,15 +29,17 @@ class BedsoresController < ApplicationController
   end
 
   def create
-    bedsore_part_id = params[:bedsore_part_id]
+    bedsore_part_id = params[:bedsore][:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)
-    bedsore = @bedsore_part.bedsores.build()
-    bedsore.update(params, current_nurse)
+    @bedsore = @bedsore_part.bedsores.build()
+    @bedsore.update(params, current_nurse)
     # 紐づくDesign_Rモデルを作る
-    design_r = bedsore.build_design_r
-    if bedsore.save() && design_r.save()
+    design_r = @bedsore.build_design_r
+    if @bedsore.save() && design_r.save()
       flash[:primary] = '新しく褥瘡情報を登録しました'
       redirect_to action: 'index', bedsore_part_id: bedsore_part_id
+    else
+      render('bedsores/new')
     end
   end
 
