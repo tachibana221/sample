@@ -3,7 +3,7 @@ class BedsoresController < ApplicationController
   before_action :login_check
 
   def index
-    bedsore_part_id = params[:bedsore_part_id]
+    bedsore_part_id = params[:bedsore_part_id] ? params[:bedsore_part_id] : params[:bedsore][:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)
   end
 
@@ -14,7 +14,8 @@ class BedsoresController < ApplicationController
 
   def new
     bedsore_part_id = params[:bedsore_part_id]
-    @bedsore_part = BedsorePart.find(bedsore_part_id)
+    bedsore_part = BedsorePart.find(bedsore_part_id)
+    @bedsore = bedsore_part.bedsores.build()
   end
 
   def edit
@@ -28,15 +29,19 @@ class BedsoresController < ApplicationController
   end
 
   def create
-    bedsore_part_id = params[:bedsore_part_id]
-    @bedsore_part = BedsorePart.find(bedsore_part_id)
-    bedsore = @bedsore_part.bedsores.build()
-    bedsore.update(params, current_nurse)
+    bedsore_part_id = params[:bedsore][:bedsore_part_id]
+    bedsore_part = BedsorePart.find(bedsore_part_id)
+    bedsore = bedsore_part.bedsores.build()
+    bedsore.update(params[:bedsore], current_nurse)
     # 紐づくDesign_Rモデルを作る
     design_r = bedsore.build_design_r
     if bedsore.save() && design_r.save()
       flash[:primary] = '新しく褥瘡情報を登録しました'
       redirect_to action: 'index', bedsore_part_id: bedsore_part_id
+    else
+      # エラー文を入れて新規登録画面に飛ばす
+      flash[:danger] = bedsore.errors.full_messages.join("<br>")
+      redirect_to action: 'new', bedsore_part_id: bedsore_part_id    
     end
   end
 

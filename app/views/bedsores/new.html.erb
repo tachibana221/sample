@@ -1,8 +1,15 @@
 <%= javascript_include_tag "imageResize" %>
 
+  <%# エラー表示 %>
+<% @bedsore.errors.full_messages.each do |message|%>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+
 <h1>褥瘡情報を新規登録</h1>
 <%= form_with model: @bedsore, url:"/bedsores", id:"image-form", local: true do |form| %>
-  <%= form.hidden_field :bedsore_part_id, :value => @bedsore_part.id %>
+  <%= form.hidden_field :bedsore_part_id, :value => @bedsore.bedsore_part.id %>
   <%= form.hidden_field :image_base64, id: "image-base64" %>
   <div class="form-group">
     <%= form.label :"コメント"%>
