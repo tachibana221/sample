@@ -7,9 +7,9 @@ module SessionsHelper
   # 現在ログイン中の看護師を返す
   def current_nurse
     if (nurse_id = session[:nurse_id])
-      @current_nurse ||= Nurse.find_by(id: nurse_id)
+      @current_nurse ||= Nurse.find(nurse_id)
     elsif (nurse_id = cookies.signed[:nurse_id])
-      nurse = Nurse.find_by(id: nurse_id)
+      nurse = Nurse.find(nurse_id)
       if nurse&.authenticated?(cookies[:remember_token])
         log_in(nurse)
         @current_nurse = nurse
