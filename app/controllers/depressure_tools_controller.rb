@@ -15,12 +15,12 @@ class DepressureToolsController < ApplicationController
 
   # 詳細ページ
   def show
-    @tool = DepressureTool.find_by(id: params[:id])
+    @tool = DepressureTool.find(params[:id])
   end
 
   # 編集ページ
   def edit
-    @tool = DepressureTool.find_by(id: params[:id])
+    @tool = DepressureTool.find(params[:id])
   end
 
   # 新規作成
@@ -37,7 +37,7 @@ class DepressureToolsController < ApplicationController
 
   # 登録情報更新
   def update
-    @tool = DepressureTool.find_by(id: params[:id])
+    @tool = DepressureTool.find(params[:id])
     @tool.update(params[:depressure_tool])
     if @tool.save()
       flash[:primary] = '新しく除圧用具を登録しました'
@@ -49,7 +49,7 @@ class DepressureToolsController < ApplicationController
 
   # 削除
   def destroy
-    @tool = DepressureTool.find_by(id: params[:id])
+    @tool = DepressureTool.find(params[:id])
     @tool.destroy()
     redirect_to('/depressure_tools')
   end

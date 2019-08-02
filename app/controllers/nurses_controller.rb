@@ -9,7 +9,7 @@ class NursesController < ApplicationController
 
   # 詳細ページ
   def show
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
   end
 
   # 新規作成ページ
@@ -19,7 +19,7 @@ class NursesController < ApplicationController
 
   # 編集ページ
   def edit
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
   end
 
   # 新規作成メソッド
@@ -37,11 +37,11 @@ class NursesController < ApplicationController
 
   # 更新メソッド
   def update
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
     # フォームの値取り出し
     @nurse.update(params[:nurse])
     if @nurse.save()
-      flash.now[:primary] = '登録情報を更新しました'
+      flash[:primary] = '登録情報を更新しました'
       redirect_to("/nurses/#{params[:id]}")
     else
       render('nurses/edit')
@@ -50,7 +50,7 @@ class NursesController < ApplicationController
 
   # 削除メソッド
   def destroy
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
     @nurse.destroy()
     redirect_to('/nurses')
   end

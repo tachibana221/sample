@@ -15,12 +15,12 @@ class CareToolsController < ApplicationController
 
   # 詳細ページ
   def show
-    @tool = CareTool.find_by(id: params[:id])
+    @tool = CareTool.find(params[:id])
   end
 
   # 編集ページ
   def edit
-    @tool = CareTool.find_by(id: params[:id])
+    @tool = CareTool.find(params[:id])
   end
 
   # 新規作成
@@ -37,7 +37,7 @@ class CareToolsController < ApplicationController
 
   # 登録情報更新
   def update
-    @tool = CareTool.find_by(id: params[:id])
+    @tool = CareTool.find(params[:id])
     @tool.update(params[:care_tool])
     if @tool.save()
       flash[:primary] = '新しくケア物品を登録しました'
@@ -49,7 +49,7 @@ class CareToolsController < ApplicationController
 
   # 削除
   def destroy
-    @tool = CareTool.find_by(id: params[:id])
+    @tool = CareTool.find(params[:id])
     @tool.destroy()
     redirect_to('/care_tools')
   end

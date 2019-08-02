@@ -5,11 +5,11 @@ class SessionsController < ApplicationController
   end
 
   def new
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
   end
 
   def create
-    @nurse = Nurse.find_by(id: params[:id])
+    @nurse = Nurse.find(params[:id])
     # レコードが存在して、入力されたパスワードが正しいならログインさせる
     if @nurse&.authenticate(params[:password])
       log_in(@nurse)

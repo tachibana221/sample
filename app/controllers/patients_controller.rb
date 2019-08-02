@@ -11,7 +11,7 @@ class PatientsController < ApplicationController
 
   # 詳細ページ
   def show
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
   end
 
   # 新規作成ページ
@@ -21,12 +21,12 @@ class PatientsController < ApplicationController
 
   # 編集ページ
   def edit
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
   end
 
   # 編集ページ
   def image_form
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
   end
 
   # 新規作成メソッド
@@ -46,7 +46,7 @@ class PatientsController < ApplicationController
 
   # 更新メソッド
   def update
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
     # フォームの値取り出し
     @patient.update(params[:patient], current_nurse)
     if @patient.save()
@@ -58,7 +58,7 @@ class PatientsController < ApplicationController
   end
 
   def upload_image
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
     # フォームの値取り出し
     @patient.uploadImage(params, current_nurse)
     if @patient.save()
@@ -71,7 +71,7 @@ class PatientsController < ApplicationController
 
   # 削除メソッド
   def destroy
-    @patient = Patient.find_by(id: params[:id])
+    @patient = Patient.find(params[:id])
     @patient.destroy()
     redirect_to('/patients')
   end
