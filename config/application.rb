@@ -19,8 +19,9 @@ module NurseSystem
     # タイムゾーンを東京に
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
-    
+
     # 言語設定を日本語に
     config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
   end
 end
