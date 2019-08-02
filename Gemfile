@@ -47,6 +47,9 @@ gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'rubocop'
 gem 'rubocop-rails'
 
+# エラーメッセージ等の日本語化用
+gem 'rails-i18n'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

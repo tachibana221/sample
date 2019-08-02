@@ -1,0 +1,18 @@
+# モデルの日本語化
+ja:
+  activerecord:
+    models:
+      patient: "療養者"
+      nurse: "看護師"
+      depressure_tool: "除圧用具"
+      care_tool: "ケア物品"
+    attributes:
+      patient:
+        name: "名前"
+      nurse:
+        name: "名前"
+        password: "パスワード"
+      depressure_tool:
+        name: "名前"
+      care_tool:
+        name: "名前"
