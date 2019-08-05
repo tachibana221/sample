@@ -20,7 +20,7 @@
   - https://prog-8.com/languages/git
   - https://backlog.com/ja/git-tutorial
   - https://o2project.github.io/steins-git
-- Docker(必須ではない)
+- Docker
   - windowsでの環境構築がダルから使ってた。必須ではないので興味があれば適当にチュートリアル探してください
 
 ## 2.環境構築
@@ -29,6 +29,7 @@
 ## 3.アプリケーションの構成
 ### ディレクトリ構成
 railsのお作法に沿ってフォルダは分けているので、チュートリアルを一通りやればだいたい分かると思います(2019/7現在)。
+javascriptファイルの配置がちょっとややこしいかもしれないので下で`lib/`、`vender/`ディレクトリと`config/initializers/assets.rb`を確認しておいてください。
 
 参考サイト
 - http://www5a.biglobe.ne.jp/~araibear/rails1_1.htm
@@ -43,6 +44,8 @@ railsのお作法に沿ってフォルダは分けているので、チュート
     - views : 各ビューが入ってる
     - validators : 絵文字の入力を弾くやつなどカスタムバリデーション（独自に定義したバリデーション）が入っている
   - config : 設定ファイルが入っている
+    - initializers
+      - assets.rb 使用したいjavascirptファイルをここで読みこむ。
     - locales : 翻訳ファイルが入っている
       - ja.yml : エラーメッセージ等の翻訳設定が記述されている
       - models : モデルの翻訳ファイルが入っている
