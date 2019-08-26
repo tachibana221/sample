@@ -61,7 +61,7 @@ javascriptファイルの配置がちょっとややこしいかもしれない�
   - lib : アプリケーションで使用するrubyファイル以外のスクリプトファイルが入っている(vendorとの違いはこっちは自分で書いたスクリプト)
     - assets/javascript
       - imageResize.js : 画像投稿時に画像のサイズを変更するスクリプト
-      - measureDesignRSize.js : Design-Rで褥瘡のサイズを測定するスクリプト
+      - measureDesignRSize.js : DESIGN-Rで褥瘡のサイズを測定するスクリプト
       - setupPainer.js : 手書きコメントを入力するスクリプト
       - setupPaintViewer.js : 入力された手書きコメントを描画するためのスクリプト(setupPainer.jsから表示する処理だけを抜き出したもの)
   - public
