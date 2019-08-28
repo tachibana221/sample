@@ -51,7 +51,13 @@ class NursesController < ApplicationController
   # 削除メソッド
   def destroy
     @nurse = Nurse.find(params[:id])
-    @nurse.destroy()
+    # 現在ログインしているアカウントは削除できないように
+    if @nurse.id == current_nurse.id
+      flash[:danger] = 'ログイン中のアカウントは削除できません'
+    else
+      @nurse.destroy()
+    end
+
     redirect_to('/nurses')
   end
 end
