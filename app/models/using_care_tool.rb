@@ -12,8 +12,8 @@ class UsingCareTool < ApplicationRecord
     # 画像が投稿された場合は書き換える
     self.image = params[:image] if params[:image]
 
-    # has_manyフィールドに生えてくる便利なメソッド
-    # フィールド名(単数形)_idsでいい感じに差分を見て追加とか削除をしてくれる
+    # has_manyフィールドの便利メソッド
+    # フィールド名(単数形)_idsで差分を見て追加とか削除を行なう
     self.care_tool_ids = params[:tool_ids]
   end
 end

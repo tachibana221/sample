@@ -15,7 +15,6 @@ class Patient < ApplicationRecord
   validates :name, presence: true
 
   # 性別を表すenum
-  # めんどくさいから日本語だけど許してくれ
   enum sex: { "未入力": 0, "男性": 1, "女性": 2, "その他": 9 }
 
   # コントローラーから渡されたparamでカラムを更新する
@@ -38,6 +37,7 @@ class Patient < ApplicationRecord
       self.image_editor = nurse
     end
 
+#     画像投稿日を書き換える
     self.image_updated_at = DateTime.new(
       params['image_updated_at(1i)'].to_i,
       params['image_updated_at(2i)'].to_i,

@@ -2,7 +2,6 @@
 
 # 褥瘡に対する備考的な使いかたをするcommentカラムと
 # 画像上に表示させるコメントを持つcommentsカラムがある
-# TODO:あとで片方をリネームする
 class Bedsore < ApplicationRecord
   belongs_to :bedsore_part
   belongs_to :image_editor, class_name: 'Nurse', foreign_key: 'image_editor_id', optional: true

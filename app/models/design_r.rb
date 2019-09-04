@@ -80,7 +80,7 @@ class DesignR < ApplicationRecord
       when 'DU' then 5
       else 0
       end
-    score
+    return score
   end
 
   # 滲出液のスコア算出
@@ -95,7 +95,7 @@ class DesignR < ApplicationRecord
       when 'E6' then 6
       else 0
       end
-    score
+    return score
   end
 
   # 大きさの面積を計算
@@ -118,7 +118,7 @@ class DesignR < ApplicationRecord
       when 64...100 then 12
       else 15
       end
-    score
+    return score
   end
 
   # 大きさのスコアから対応するコードを取得
@@ -134,7 +134,7 @@ class DesignR < ApplicationRecord
       when 12 then 's12'
       else 'S15'
       end
-    code
+    return code
   end
 
   # 炎症/感染のスコア算出
@@ -149,7 +149,7 @@ class DesignR < ApplicationRecord
       when 'I9' then 9
       else 0
       end
-    score
+    return score
   end
 
   # 肉芽組織のスコア算出
@@ -166,7 +166,7 @@ class DesignR < ApplicationRecord
       when 'G6' then 6
       else 0
       end
-    score
+    return score
   end
 
   # 壊死組織のスコア算出
@@ -180,7 +180,7 @@ class DesignR < ApplicationRecord
       when 'N6' then 6
       else 0
       end
-    score
+    return score
   end
 
   # ポケットのスコアを算出
@@ -197,7 +197,7 @@ class DesignR < ApplicationRecord
       when 16...36 then 12
       else 24
       end
-    score
+    return score
   end
 
   # ポケットのスコアから対応するコードを取得
@@ -211,19 +211,19 @@ class DesignR < ApplicationRecord
       when 12 then 'P12'
       else 'P24'
       end
-    code
+    return code
   end
 
   # 合計スコアを算出
   # 深さのスコアは使用しない
   def calcDesignRScore
-    calcExudateScore() + clacSizeScore() + calcInflammationScore() +
+    return calcExudateScore() + clacSizeScore() + calcInflammationScore() +
       calcGranuleTissueScore() + calcNecroticTissueScore() + calcPocketScore()
   end
 
   # 合計コードを取得
   def getDesignRCode
-    extractCode(depth) + '-' + extractCode(exudate) + getSizeCode() + extractCode(inflammation) +
+    return extractCode(depth) + '-' + extractCode(exudate) + getSizeCode() + extractCode(inflammation) +
       extractCode(granule_tissue) + extractCode(necrotic_tissue) + '-' + getPocketCode()
   end
 end

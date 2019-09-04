@@ -1,16 +1,21 @@
 class UsingCareToolsController < ApplicationController
+
+  # 一覧ページ
   def index; end
 
+  # 詳細ページ
   def show
     @using_care_tool = UsingCareTool.find(params[:id])
     @care_tools = CareTool.all()
   end
 
+  # 編集ページ
   def edit
     @using_care_tool = UsingCareTool.find(params[:id])
     @care_tools = CareTool.all()
   end
 
+  # 登録情報更新
   def update
     @using_care_tool = UsingCareTool.find(params[:id])
     @using_care_tool.update(params[:using_care_tool])

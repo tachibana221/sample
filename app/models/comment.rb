@@ -1,4 +1,5 @@
-class Comment < ApplicationRecord
+# 褥瘡画像に添付するコメントモデル
+class Comment < ApplicationRecord 
   belongs_to :bedsore
 
   def update(params)

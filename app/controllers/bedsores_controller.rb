@@ -2,32 +2,39 @@ class BedsoresController < ApplicationController
   # ログイン済みのユーザーかどうかのチェック
   before_action :login_check
 
+  # 一覧ページ
   def index
     bedsore_part_id = params[:bedsore_part_id] ? params[:bedsore_part_id] : params[:bedsore][:bedsore_part_id]
     @bedsore_part = BedsorePart.find(bedsore_part_id)
   end
 
+  # 新規作成ページ
   def show
     bedsore_id = params[:id]
     @bedsore = Bedsore.find(bedsore_id)
   end
 
+  # 新規作成ページ
   def new
     bedsore_part_id = params[:bedsore_part_id]
     bedsore_part = BedsorePart.find(bedsore_part_id)
+    # リレーションを持った褥瘡除法を作成
     @bedsore = bedsore_part.bedsores.build()
   end
 
+  # 編集ページ
   def edit
     bedsore_id = params[:id]
     @bedsore = Bedsore.find(bedsore_id)
   end
 
+  # 手書き入力ページ
   def paint
     bedsore_id = params[:id]
     @bedsore = Bedsore.find(bedsore_id)
   end
 
+  # 新規作成
   def create
     bedsore_part_id = params[:bedsore][:bedsore_part_id]
     bedsore_part = BedsorePart.find(bedsore_part_id)
@@ -45,6 +52,7 @@ class BedsoresController < ApplicationController
     end
   end
 
+  # 登録情報更新
   def update
     @bedsore = Bedsore.find(params[:id])
     @bedsore.update(params[:bedsore], current_nurse)
@@ -55,8 +63,11 @@ class BedsoresController < ApplicationController
     end
   end
 
+  # 削除
   def destroy
     @bedsore = Bedsore.find(params[:id])
-    redirect_to action: 'index', bedsore_part_id: @bedsore.bedsore_part.id if @bedsore.destroy()
+    if @bedsore.destroy()
+      redirect_to action: 'index', bedsore_part_id: @bedsore.bedsore_part.id 
+    end
   end
 end

@@ -1,16 +1,20 @@
 class UsingDepressureToolsController < ApplicationController
+  # 一覧ページ
   def index; end
 
+  # 詳細ページ
   def show
     @using_depressure_tool = UsingDepressureTool.find(params[:id])
     @depressure_tools = DepressureTool.all()
   end
 
+  # 編集ページ
   def edit
     @using_depressure_tool = UsingDepressureTool.find(params[:id])
     @depressure_tools = DepressureTool.all()
   end
 
+  # 登録情報更新
   def update
     @using_depressure_tool = UsingDepressureTool.find(params[:id])
     @using_depressure_tool.update(params[:using_depressure_tool])
