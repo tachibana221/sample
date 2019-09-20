@@ -3,19 +3,33 @@
 <div class="mt-1 mb-2">
   <%= link_to("ケア情報新規登録", {:controller => "care_infos", :action => "new", :bedsore_part_id => @bedsore_part.id},class:"btn btn-primary") %>
 </div>
-<div class="list-group">
-  <% @bedsore_part.care_infos.each do |care_info| %>
-    <div class="row list-item position-relative">
-      <div class="col-md-3 mb-md-0 p-md-4">
-          <%= link_to(image_tag(care_info.image.url, :class => "img-thumbnail"), "/care_infos/#{care_info.id}") if care_info.image?%>
-      </div>
-      <div class="col position-static p-4 pl-md-0">
-        <%= care_info.comment %>
-        <div class="d-flex justify-content-end">
-          <%= link_to("詳細", "/care_infos/#{care_info.id}", class:"btn btn-info btn-sm m-1") %>
-          <%= link_to("削除", "/care_infos/#{care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm m-1") %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">画像</th>
+      <th scope="col">コメント</th>
+      <th scope="col">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bedsore_part.care_infos.each do |care_info| %>
+      <tr>
+        <td style="width:200px;">
+          <div class="">
+
+ <%= link_to(image_tag(care_info.image.url, :class => "img-thumbnail"), "/care_infos/#{care_info.id}") if care_info.image?%> 
+
+          </div>
+        </td>
+        <td><%= care_info.comment %></td>
+        <td style="width:200px;">      
+          <div class="container">
+            <%= link_to("詳細", "/care_infos/#{care_info.id}", class:"btn btn-info btn-sm m-1") %>
+            <%= link_to("削除", "/care_infos/#{care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
