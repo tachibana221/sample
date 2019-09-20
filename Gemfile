@@ -50,6 +50,9 @@ gem 'rubocop-rails'
 # エラーメッセージ等の日本語化用
 gem 'rails-i18n'
 
+# 並び順を変えるためのライブラリ
+gem 'acts_as_list'
+
 # 脆弱性の検査
 gem 'brakeman'
 

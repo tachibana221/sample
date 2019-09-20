@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @bedsore_part.care_infos.each do |care_info| %>
+    <% @bedsore_part.care_infos.order(:position).each do |care_info| %>
       <tr>
         <td style="width:200px;">
           <div class="">
@@ -27,6 +27,8 @@
           <div class="container">
             <%= link_to("詳細", "/care_infos/#{care_info.id}", class:"btn btn-info btn-sm m-1") %>
             <%= link_to("削除", "/care_infos/#{care_info.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+            <%= care_info.first? ? ' '.html_safe : link_to('↑', {:controller => "care_infos", :action => "move_higher", :id => care_info.id, :bedsore_part_id => @bedsore_part.id}, method: :put) %>
+            <%= care_info.last? ? ' '.html_safe : link_to('↓', {:controller => "care_infos", :action => "move_lower", :id => care_info.id, :bedsore_part_id => @bedsore_part.id}, method: :put) %>
           </div>
         </td>
       </tr>

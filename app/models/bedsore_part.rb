@@ -3,7 +3,7 @@ class BedsorePart < ApplicationRecord
   belongs_to :patient
   belongs_to :nurse, optional: true
 
-  has_many :care_infos, dependent: :destroy
+  has_many :care_infos, -> { order(position: :asc) }, dependent: :destroy
   has_many :bedsores, dependent: :destroy
 
   # 大分類
