@@ -3,21 +3,34 @@
 <div class="mt-1 mb-2">
   <%= link_to("褥瘡情報登録", {:controller => "bedsores", :action => "new", :bedsore_part_id => @bedsore_part.id},class:"btn btn-primary") %>
 </div>
-<div class="list-group">
-  <% @bedsore_part.bedsores.each do |bedsore| %>
-    <div class="list-group-item d-flex justify-content-between">
-      <div class="d-flex flex-row" style = "flex:1">
-        <div style = "width: 150px;">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" style="width:25%;">画像</th>
+      <th scope="col">コメント</th>
+      <th scope="col"  style="width:20%;">DESIGN-R</th>
+      <th scope="col" style="width:25%;">サイズ</th>
+      <th scope="col" style="width:7%;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bedsore_part.bedsores.each do |bedsore| %>
+      <tr>
+        <td>
           <%= image_tag(bedsore.image.url, :class => "img-thumbnail") if bedsore.image?%>
-        </div>
-        <div class="ml-3 flex-grow-1" style="flex:1">
-          <%= bedsore.comment %>
-        </div>
-      </div>
-      <div>
-        <%= link_to("詳細", "/bedsores/#{bedsore.id}", class:"btn btn-primary btn-sm") %>
-        <%= link_to("削除", "/bedsores/#{bedsore.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
-      </div>
-    </div>
-  <% end %>
-</div>
+          <p>撮影日:<%= bedsore.image_edited_at.strftime("%Y年%m月%d日 %H時%M分") if !bedsore.image_edited_at.nil? %></p>
+        </td>
+        <td><%= bedsore.comment %></td>
+        <td><%= bedsore.design_r.getDesignRCode() %> = <%= bedsore.design_r.calcDesignRScore %></td>
+        <td>
+          <p>大きさ: 短径 <%= bedsore.design_r.size_minor_axis %>cm x 長径 <%= bedsore.design_r.size_major_axis %>cm</p>
+          <p>ポケット: 短径 <%= bedsore.design_r.pocket_minor_axis %>cm x 長径 <%= bedsore.design_r.pocket_major_axis %>cm</p>
+        </td>
+        <td ">      
+          <%= link_to("詳細", "/bedsores/#{bedsore.id}", class:"btn btn-primary btn-sm") %>
+          <%= link_to("削除", "/bedsores/#{bedsore.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
