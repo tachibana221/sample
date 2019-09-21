@@ -18,7 +18,6 @@
       <%= image_tag(@patient.image.url, :class => "img-thumbnail") if @patient.image?%>
     </div>
     <p>最終編集者:<%= @patient.image_editor.name if !@patient.image_editor.nil? %></p>
-    <p>画像撮影日時:<%= @patient.image_updated_at.strftime("%Y年%m月%d日 %H時%M分") if !@patient.image_updated_at.nil? && @patient.image?%></p>
   </div>
   <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
   <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
@@ -32,6 +31,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <%= form_with model: @bedsore_part, url:"/bedsore_parts", local: true do |form| %>
+          <div class="modal-body">
+            <h3>褥瘡部位を新規登録</h3>
+            場所と部位名を入力するか、または好発部位を選択してください
+          </div>
           <%= form.hidden_field :patient_id, :value => @patient.id %>
           <div class="modal-body">
             <%= form.label :"場所"%>

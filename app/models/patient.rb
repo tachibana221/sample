@@ -38,12 +38,6 @@ class Patient < ApplicationRecord
     end
 
 #     画像投稿日を書き換える
-    self.image_updated_at = DateTime.new(
-      params['image_updated_at(1i)'].to_i,
-      params['image_updated_at(2i)'].to_i,
-      params['image_updated_at(3i)'].to_i,
-      params['image_updated_at(4i)'].to_i,
-      params['image_updated_at(5i)'].to_i
-    )
+    self.image_updated_at = today
   end
 end
