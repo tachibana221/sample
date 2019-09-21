@@ -39,13 +39,15 @@ class Bedsore < ApplicationRecord
       self.image_editor = nurse
     end
     
-    self.image_edited_at = DateTime.new(
-      params['image_edited_at(1i)'].to_i,
-      params['image_edited_at(2i)'].to_i,
-      params['image_edited_at(3i)'].to_i,
-      params['image_edited_at(4i)'].to_i,
-      params['image_edited_at(5i)'].to_i
-    )
+    if params['image_edited_at(1i)']
+      self.image_edited_at = DateTime.new(
+        params['image_edited_at(1i)'].to_i,
+        params['image_edited_at(2i)'].to_i,
+        params['image_edited_at(3i)'].to_i,
+        params['image_edited_at(4i)'].to_i,
+        params['image_edited_at(5i)'].to_i
+      )
+    end
     # 手書き画像が投稿された場合は書き換える
     # deta urlで送られてきた場合は変換する
     if params[:handwrite_image_url]

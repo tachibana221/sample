@@ -47,6 +47,10 @@ class CareInfosController < ApplicationController
     if care_info.save()
       flash[:primary] = '新しくケア情報を登録しました'
       redirect_to action: 'index', bedsore_part_id: bedsore_part_id
+    else
+      # エラー文を入れて新規登録画面に飛ばす
+      flash[:danger] = care_info.errors.full_messages.join("<br>")
+      redirect_to action: 'new', bedsore_part_id: bedsore_part_id
     end
   end
 
