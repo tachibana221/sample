@@ -32,6 +32,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <%= form_with model: @bedsore_part, url:"/bedsore_parts", local: true do |form| %>
+          <div class="modal-body">
+            <h3>褥瘡部位を新規登録</h3>
+            場所と部位名を入力するか、または好発部位を選択してください
+          </div>
           <%= form.hidden_field :patient_id, :value => @patient.id %>
           <div class="modal-body">
             <%= form.label :"場所"%>
