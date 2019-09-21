@@ -37,9 +37,15 @@ class Bedsore < ApplicationRecord
     if params[:image_base64] && params[:image_base64] != ''
       self.image = base64_conversion(params[:image_base64], 'image_' + today.strftime('%Y%m%d%H%M%S'))
       self.image_editor = nurse
-      self.image_edited_at = today
     end
-
+    
+    self.image_edited_at = DateTime.new(
+      params['image_edited_at(1i)'].to_i,
+      params['image_edited_at(2i)'].to_i,
+      params['image_edited_at(3i)'].to_i,
+      params['image_edited_at(4i)'].to_i,
+      params['image_edited_at(5i)'].to_i
+    )
     # 手書き画像が投稿された場合は書き換える
     # deta urlで送られてきた場合は変換する
     if params[:handwrite_image_url]

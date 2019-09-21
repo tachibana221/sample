@@ -7,9 +7,16 @@
     <%= form.label :"コメント"%>
     <%= form.text_area :comment, class: "form-control", id: "topics" %>
   </div>
+  <p>画像を変更する場合は新しい画像を選択してください</p>
   <div class="modal-body">
     <div class="form-group custom-file">
       <%= form.file_field :image,  id: "image-file" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :"撮影日時"%>
+    <div class="form-row">
+      <%= form.datetime_select :image_edited_at, {}, class: 'form-control col-md-2' %>
     </div>
   </div>
 <% end %>
