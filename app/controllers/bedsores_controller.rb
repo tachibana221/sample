@@ -60,6 +60,9 @@ class BedsoresController < ApplicationController
     if @bedsore.save()
       flash[:primary] = '褥瘡情報を更新しました'
       redirect_to("/bedsores/#{params[:id]}")
+    else
+      # エラー文を入れて新規登録画面に飛ばす
+      flash[:danger] = @bedsore.errors.full_messages.join("<br>")
     end
   end
 
