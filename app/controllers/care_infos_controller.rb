@@ -25,6 +25,18 @@ class CareInfosController < ApplicationController
     care_info_id = params[:id]
     @care_info = CareInfo.find(care_info_id)
   end
+ 
+  def move_higher
+    bedsore_part_id = params[:bedsore_part_id]
+    CareInfo.find(params[:id]).move_higher
+    redirect_to action: 'index', bedsore_part_id: bedsore_part_id
+  end
+ 
+  def move_lower
+    bedsore_part_id = params[:bedsore_part_id]
+    CareInfo.find(params[:id]).move_lower
+    redirect_to action: 'index', bedsore_part_id: bedsore_part_id
+  end
 
   # 新規作成
   def create

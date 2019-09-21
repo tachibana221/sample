@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_052342) do
+ActiveRecord::Schema.define(version: 2019_09_20_120830) do
 
   create_table "assign_care_tools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "using_care_tool_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_052342) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "bedsore_part_id"
+    t.integer "position"
     t.index ["bedsore_part_id"], name: "index_care_infos_on_bedsore_part_id"
     t.index ["comment_editor_id"], name: "index_care_infos_on_comment_editor_id"
     t.index ["image_editor_id"], name: "index_care_infos_on_image_editor_id"

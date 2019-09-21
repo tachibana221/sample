@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   # 褥瘡部位
   resources :bedsore_parts
   # ケア情報
+  put    'care_infos/move_higher'   => 'care_infos#move_higher'
+  put    'care_infos/move_lower'   => 'care_infos#move_lower'
   resources :care_infos
+
   # 褥瘡
   resources :bedsores
   get 'bedsores/:id/paint' => 'bedsores#paint'
