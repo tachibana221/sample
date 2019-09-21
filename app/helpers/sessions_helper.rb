@@ -7,7 +7,15 @@ module SessionsHelper
   # 現在ログイン中の看護師を返す
   def current_nurse
     if (nurse_id = session[:nurse_id])
-      @current_nurse ||= Nurse.find(nurse_id)
+      begin
+        @current_nurse ||= Nurse.find(nurse_id)
+      rescue => exception
+        session.delete(:nurse_id)
+        @current_nurse = nil
+        cookies.delete(:nurse_id)
+        cookies.delete(:remember_token)
+        flash.now[:danger] = 'ログインに失敗しました。他のユーザーにアカウントを削除された可能性があります' 
+      end
     elsif (nurse_id = cookies.signed[:nurse_id])
       nurse = Nurse.find(nurse_id)
       if nurse&.authenticated?(cookies[:remember_token])
