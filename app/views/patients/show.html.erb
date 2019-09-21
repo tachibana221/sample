@@ -26,6 +26,8 @@
 <hr/>
 <h3>褥瘡部位</h3>
 <div class="container">
+
+  <%# 褥瘡部位登録用のモーダル %>
   <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -51,16 +53,17 @@
       </div>
     </div>
   </div>
+
   <button type="button" class="btn btn-primary mt-1 mb-2" data-toggle="modal" data-target="#post">新規登録</button>
   <div class="list-group">
     <% @patient.bedsore_parts.each do |bedsore_part| %>
         <div class="list-group-item d-flex justify-content-between align-items-center">
         <div>
-          <%= bedsore_part.part_name %>
-          <%= link_to("ケア情報", {:controller => "care_infos", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
-          <%= link_to("褥瘡管理", {:controller => "bedsores", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
+          <%= bedsore_part.getName() %>
         </div>
           <div class="">
+            <%= link_to("ケア情報", {:controller => "care_infos", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
+            <%= link_to("褥瘡管理", {:controller => "bedsores", :bedsore_part_id => bedsore_part.id},class:"btn btn-info btn-sm") %>
             <%= link_to("削除", "/bedsore_parts/#{bedsore_part.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger btn-sm") %>
           </div>
         </div>

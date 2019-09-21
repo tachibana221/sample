@@ -19,4 +19,14 @@ class BedsorePart < ApplicationRecord
     self.common_part = params[:common_part]
     self.nurse = nurse
   end
+
+  def getName()
+    # 好発部位が登録されていれば表示する
+    if self.common_part_before_type_cast != 0
+      return self.common_part
+    end
+
+    # 大分類 + 部位名
+    return self.part_genre + " " + self.part_name
+  end
 end
