@@ -4,7 +4,7 @@
 <h1><%= @bedsore.bedsore_part.patient.name %>さんの<%= @bedsore.bedsore_part.part_name %>のDESIGN-R</h1>
 <%= link_to("褥瘡管理画面へ", {:controller => "bedsores", :bedsore_part_id => @bedsore.bedsore_part.id}) %>
 <div class="container">
-  <p>撮影者:<%= @bedsore.image_editor.name %></p>
+  <p>撮影者:<%= @bedsore.image_editor.name if !@bedsore.image_editor.nil? %></p>
   <p>撮影日:<%= @bedsore.image_edited_at.strftime("%Y年%m月%d日 %H時%M分") if !@bedsore.image_edited_at.nil? %></p>
 </div>
 <h3>DESIGN-R情報</h3>
