@@ -18,7 +18,6 @@
       <%= image_tag(@patient.image.url, :class => "img-thumbnail") if @patient.image?%>
     </div>
     <p>最終編集者:<%= @patient.image_editor.name if !@patient.image_editor.nil? %></p>
-    <p>画像撮影日時:<%= @patient.image_updated_at.strftime("%Y年%m月%d日 %H時%M分") if !@patient.image_updated_at.nil? && @patient.image?%></p>
   </div>
   <%= link_to("編集", "/patients/#{@patient.id}/edit", class:"btn btn-primary") %>
   <%= link_to("削除", "/patients/#{@patient.id}", method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger") %>
