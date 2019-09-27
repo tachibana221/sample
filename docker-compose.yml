@@ -13,13 +13,13 @@ services:
       - ./db/mysql_init:/docker-entrypoint-initdb.d
       # 永続化するときにマウントするdir
       - ./db/mysql_data:/var/lib/mysql
-
   web:
     build: .
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/app_name
+      - .:/app
     ports:
       - "3000:3000"
     links:
       - db
+    entrypoint: ./wait-for-it-master/wait-for-it.sh db:3306
