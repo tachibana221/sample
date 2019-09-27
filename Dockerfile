@@ -1,8 +1,7 @@
 FROM ruby:2.6.3
 
 # 必要なパッケージのインストール
-RUN echo "deb http://deb.debian.org/debian jessie main" > /etc/apt/sources.list &&\
-    echo "deb http://security.debian.org jessie/updates main" >> /etc/apt/sources.list &&\
+RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list && \
     apt-get update -qq && \
 		curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt-get install -y build-essential \ 
