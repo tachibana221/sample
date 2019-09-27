@@ -22,4 +22,4 @@ services:
       - "3000:3000"
     links:
       - db
-    entrypoint: ./entrypoint.sh
+    entrypoint: ./wait-for-it-master/wait-for-it.sh db:3306 --
